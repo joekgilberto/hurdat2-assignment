@@ -1,4 +1,4 @@
-﻿namespace service;
+﻿namespace service.Models;
 
 public class WeatherForecast
 {

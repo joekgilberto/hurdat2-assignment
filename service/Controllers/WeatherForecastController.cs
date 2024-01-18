@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using service.Models;
 
 namespace service.Controllers;
 
