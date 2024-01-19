@@ -35,27 +35,27 @@ namespace service.Models
 
         public Hurricane(string line)
 		{
-            List<string> lineList = line.Split(",").ToList();
+            List<string> lines = line.Split(",").ToList();
 
-            for(int i = 0; i < lineList.Count; i++)
+            for(int i = 0; i < lines.Count; i++)
             {
-                lineList[i] = lineList[i].Trim();
+                lines[i] = lines[i].Trim();
             }
 
-            Basin = lineList[0].Substring(0, 2);
+            Basin = lines[0].Substring(0, 2);
 
             int atcfNumber = 0;
-            Int32.TryParse(lineList[0].Substring(2, 4), out atcfNumber);
+            Int32.TryParse(lines[0].Substring(2, 2), out atcfNumber);
             AtcfNumber = atcfNumber;
 
             int year = 0;
-            Int32.TryParse(lineList[0].Substring(4), out year);
+            Int32.TryParse(lines[0].Substring(4), out year);
             Year = year;
 
-            Name = lineList[1];
+            Name = lines[1];
 
             int trackEntryCount = 0;
-            Int32.TryParse(lineList[2], out trackEntryCount);
+            Int32.TryParse(lines[2], out trackEntryCount);
             TrackEntryCount = trackEntryCount;
 
             TrackEntries = new List<TrackEntry>();
@@ -68,7 +68,7 @@ namespace service.Models
 
         public override string ToString()
         {
-            return $"Basin: {Basin}; AtcfNumber: {AtcfNumber}; Year: {Year}; Name: {Name}; TrackEntryCount:{TrackEntryCount}";
+            return $"Basin: {Basin}; AtcfNumber: {AtcfNumber}; Year: {Year}; Name: {Name}; TrackEntryCount:{TrackEntryCount};";
         }
     }
 }

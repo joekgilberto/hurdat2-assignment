@@ -10,7 +10,7 @@ namespace service.CustomValidation
 
         public override bool IsValid(object? value)
         {
-            List<string> validIds = new List<string>() {"c","g","i","l","p","r","s","t","w"};
+            List<string> validIds = new List<string>() {"n/a","c","g","i","l","p","r","s","t","w"};
 
             if (!String.IsNullOrEmpty(value.ToString()))
             {

@@ -23,23 +23,23 @@ namespace service.Models
 
         [Required]
         [Range(0, 18)]
-        public int Hours
+        public int Hour
         { get; set; }
 
         [Required]
         [Range(0, 59)]
-        public int Minutes
+        public int Minute
         { get; set; }
 
         [Required]
-        [RecordId(ErrorMessage = "RecordId must be C, G, I, L, P, R, S, T, or W.")]
-        [StringLength(1, MinimumLength = 1, ErrorMessage = "RecordId must be one character long.")]
+        [RecordId(ErrorMessage = "RecordId must be N/A, C, G, I, L, P, R, S, T, or W.")]
+        [StringLength(3, MinimumLength = 1, ErrorMessage = "RecordId must be 1 to 3 characters long.")]
         public string RecordId
         { get; set; }
 
         [Required]
         [Status(ErrorMessage = "Status must be TD, TS, HU, EX, SD, SS, LO, WV, or DB.")]
-        [StringLength(2, MinimumLength = 2, ErrorMessage = "Status must be two characters long.")]
+        [StringLength(2, MinimumLength = 2, ErrorMessage = "Status must be 2 characters long.")]
         public string Status
         { get; set; }
 
@@ -72,63 +72,15 @@ namespace service.Models
         { get; set; }
 
         [Required]
-        [Range(-999, 999)]
-        public int ThirtyFourWindRadiiNEQuad
+        public WindRadii ThirtyFour
         { get; set; }
 
         [Required]
-        [Range(-999, 999)]
-        public int ThirtyFourWindRadiiSEQuad
+        public WindRadii Fifty
         { get; set; }
 
         [Required]
-        [Range(-999, 999)]
-        public int ThirtyFourWindRadiiSWQuad
-        { get; set; }
-
-        [Required]
-        [Range(-999, 999)]
-        public int ThirtyFourWindRadiiNWQuad
-        { get; set; }
-
-        [Required]
-        [Range(-999, 999)]
-        public int FiftyWindRadiiNEQuad
-        { get; set; }
-
-        [Required]
-        [Range(-999, 999)]
-        public int FiftyWindRadiiSEQuad
-        { get; set; }
-
-        [Required]
-        [Range(-999, 999)]
-        public int FiftyWindRadiiSWQuad
-        { get; set; }
-
-        [Required]
-        [Range(-999, 999)]
-        public int FiftyWindRadiiNWQuad
-        { get; set; }
-
-        [Required]
-        [Range(-999, 999)]
-        public int SixtyFourWindRadiiNEQuad
-        { get; set; }
-
-        [Required]
-        [Range(-999, 999)]
-        public int SixtyFourWindRadiiSEQuad
-        { get; set; }
-
-        [Required]
-        [Range(-999, 999)]
-        public int SixtyFourWindRadiiSWQuad
-        { get; set; }
-
-        [Required]
-        [Range(-999, 999)]
-        public int SixtyFourWindRadiiNWQuad
+        public WindRadii SixtyFour
         { get; set; }
 
         [Required]
@@ -136,56 +88,95 @@ namespace service.Models
         public int MaxRadius
         { get; set; }
 
-        public TrackEntry(
-            int year,
-            int month,
-            int day,
-            int hours,
-            int minutes,
-            string recordId,
-            string status,
-            double latitude,
-            string latitudeHemisphere,
-            double longitude,
-            string longitudeHemisphere,
-            int thirtyFourWindRadiiNEQuad,
-            int thirtyFourWindRadiiSEQuad,
-            int thirtyFourWindRadiiSWQuad,
-            int thirtyFourWindRadiiNWQuad,
-            int fiftyWindRadiiNEQuad,
-            int fiftyWindRadiiSEQuad,
-            int fiftyWindRadiiSWQuad,
-            int fiftyWindRadiiNWQuad,
-            int sixtyFourWindRadiiNEQuad,
-            int sixtyFourWindRadiiSEQuad,
-            int sixtyFourWindRadiiSWQuad,
-            int sixtyFourWindRadiiNWQuad
-        )
+        public TrackEntry(string line)
 		{
-			Year = year;
+            List<string> lines = line.Split(",").ToList();
+
+            for (int i = 0; i < lines.Count; i++)
+            {
+                if (i == 2 && lines[i] == "  ")
+                {
+                    lines[i] = "N/A";
+                }
+
+                lines[i] = lines[i].Trim();
+            }
+
+            int year = 0;
+            Int32.TryParse(lines[0].Substring(0,4), out year);
+            Year = year;
+
+            int month = 0;
+            Int32.TryParse(lines[0].Substring(4, 2), out month);
             Month = month;
+
+            int day = 0;
+            Int32.TryParse(lines[0].Substring(6), out day);
             Day = day;
-            Hours = hours;
-            Minutes = minutes;
-            RecordId = recordId;
-            Status = status;
-            Latitude = latitude;
-            LatitudeHemisphere = latitudeHemisphere;
-            Longitude = longitude;
-            LongitudeHemisphere = longitudeHemisphere;
-            ThirtyFourWindRadiiNEQuad = thirtyFourWindRadiiNEQuad;
-            ThirtyFourWindRadiiSEQuad = thirtyFourWindRadiiSEQuad;
-            ThirtyFourWindRadiiSWQuad = thirtyFourWindRadiiSWQuad;
-            ThirtyFourWindRadiiNWQuad = thirtyFourWindRadiiNWQuad;
-            FiftyWindRadiiNEQuad = fiftyWindRadiiNEQuad;
-            FiftyWindRadiiSEQuad = fiftyWindRadiiSEQuad;
-            FiftyWindRadiiSWQuad = fiftyWindRadiiSWQuad;
-            FiftyWindRadiiNWQuad = fiftyWindRadiiNWQuad;
-            SixtyFourWindRadiiNEQuad = sixtyFourWindRadiiNEQuad;
-            SixtyFourWindRadiiSEQuad = sixtyFourWindRadiiSEQuad;
-            SixtyFourWindRadiiSWQuad = sixtyFourWindRadiiSWQuad;
-            SixtyFourWindRadiiNWQuad = sixtyFourWindRadiiNWQuad;
+
+            int hour = 0;
+            Int32.TryParse(lines[1].Substring(0,2), out hour);
+            Hour = hour;
+
+            int minute = 0;
+            Int32.TryParse(lines[1].Substring(2), out minute);
+            Minute = minute;
+
+            RecordId = lines[2];
+
+            Status = lines[3];
+
+            LatitudeHemisphere = lines[4][lines[4].Length - 1].ToString();
+
+            string latitude = "";
+            if (lines[4].Contains("N"))
+            {
+                latitude = lines[4].TrimEnd('N');
+            }
+            else if (lines[4].Contains("S"))
+            {
+                latitude = lines[4].TrimEnd('S');
+            }
+            latitude = latitude.Replace('.',',');
+            Latitude = Convert.ToDouble(latitude);
+
+            LongitudeHemisphere = lines[5][lines[5].Length - 1].ToString();
+
+            string longitude = "";
+            if (lines[5].Contains("W"))
+            {
+                longitude = lines[5].TrimEnd('W');
+            }
+            else if (lines[5].Contains("E"))
+            {
+                longitude = lines[5].TrimEnd('E');
+            }
+            longitude = longitude.Replace('.', ',');
+            Longitude = Convert.ToDouble(longitude);
+
+            int maxWind = 0;
+            Int32.TryParse(lines[6], out maxWind);
+            MaxWind = maxWind;
+
+            int minPressure = 0;
+            Int32.TryParse(lines[7], out minPressure);
+            MinPressure = minPressure;
+
+            ThirtyFour = new WindRadii(lines[8], lines[9], lines[10], lines[11]);
+
+            Fifty = new WindRadii(lines[12], lines[13], lines[14], lines[15]);
+
+            SixtyFour = new WindRadii(lines[16], lines[17], lines[18], lines[19]);
+
+            int maxRadius = 0;
+            Int32.TryParse(lines[20], out maxRadius);
+            MaxRadius = maxRadius;
         }
-	}
+
+        public override string ToString()
+        {
+            return $"Year: {Year}; Month: {Month}; Day: {Day}; Hour: {Hour}; Minute: {Minute}; RecordId: {RecordId}; Latitude: {Latitude}{LatitudeHemisphere}; Longitude:{Longitude}{LongitudeHemisphere}; MaxWind: {MaxWind}; MinPressure: {MinPressure}; 34 kt (NE, SE, SW, NW): {ThirtyFour.NE}{ThirtyFour.SE}{ThirtyFour.SW}{ThirtyFour.NW}; 50 kt (NE, SE, SW, NW): {Fifty.NE}{Fifty.SE}{Fifty.SW}{Fifty.NW}; 50 kt (NE, SE, SW, NW): {SixtyFour.NE}{SixtyFour.SE}{SixtyFour.SW}{SixtyFour.NW}; MaxRadius: {MaxRadius};";
+        }
+    }
 }
 

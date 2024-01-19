@@ -13,9 +13,12 @@ namespace service.Data
         {
             Hurricanes = File.ReadAllLines("./Data/hurdat2-1851-2022-050423.txt").ToList();
 
-            Hurricane test = new Hurricane(Hurricanes[0]);
+            Hurricane testOne = new Hurricane(Hurricanes[0]);
 
-            Console.WriteLine(test.ToString());
+            TrackEntry testTwo = new TrackEntry(Hurricanes[5]);
+
+            Console.WriteLine(testOne.ToString());
+            Console.WriteLine(testTwo.ToString());
 
             //foreach(string line in Hurricanes)
             //{
