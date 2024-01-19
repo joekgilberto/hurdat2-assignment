@@ -25,21 +25,44 @@ namespace service.Models
         { get; set; }
 
         [Required]
+        [Range(1, 99)]
         public int TrackEntryCount
         { get; set; }
 
-        [Required]
-        public List<Object> TrackEntries
+        public List<TrackEntry> TrackEntries
         { get; set; }
 
-        public Hurricane(string basin, int atcfNumber, int year, string name, int trackEntryCount, List<Object> trackEntries)
+        public Hurricane(string line)
 		{
-			Basin = basin;
+            List<string> lineList = line.Split(",").ToList();
+
+            for(int i = 0; i < lineList.Count; i++)
+            {
+                lineList[i] = lineList[i].Trim();
+            }
+
+            Basin = lineList[0].Substring(0, 2);
+
+            int atcfNumber = 0;
+            Int32.TryParse(lineList[0].Substring(2, 4), out atcfNumber);
             AtcfNumber = atcfNumber;
-			Year = year;
-            Name = name;
+
+            int year = 0;
+            Int32.TryParse(lineList[0].Substring(4, 8), out year);
+            Year = year;
+
+            Name = lineList[1];
+
+            int trackEntryCount = 0;
+            Int32.TryParse(lineList[2], out trackEntryCount);
             TrackEntryCount = trackEntryCount;
-            TrackEntries = trackEntries;
+
+            TrackEntries = new List<TrackEntry>();
+        }
+
+        public void addTrackEntries(TrackEntry trackEntry)
+        {
+            TrackEntries.Add(trackEntry);
         }
 	}
 }
