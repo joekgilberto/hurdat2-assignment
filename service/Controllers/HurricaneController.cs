@@ -15,12 +15,17 @@ public class HurricaneController : ControllerBase
 
     private readonly FloridaData _florida;
 
+    private readonly FloridaLandfall _landfall;
+
+
     //Creates a constructor for HurricaneController
     public HurricaneController()
     {
         //Upon creation, initiates an instance of HurricaneData and assigns it to the property _context, working as a data source for the application
         _context = new HurricaneData();
         _florida = new FloridaData();
+        _landfall = new FloridaLandfall();
+
     }
 
     //Creates a GetAll controller that returns all hurricanes
@@ -38,9 +43,8 @@ public class HurricaneController : ControllerBase
     public List<Hurricane> GetFlorida()
     {
         List<Hurricane> hurricanes = _context.Hurricanes;
-        FloridaLandfall landfall = new FloridaLandfall();
 
-        var landfalls = hurricanes.Where(h => landfall.Check(h) && h.Year > 1900);
+        var landfalls = hurricanes.Where(h => _landfall.IsHurricane(h) && h.Year > 1900);
 
         List <Hurricane> floridaHurricanes = landfalls.ToList();
 
@@ -48,7 +52,7 @@ public class HurricaneController : ControllerBase
     }
 
     [HttpGet("test")]
-    public Object GetTest()
+    public Florida GetTest()
     {
         return _florida.Florida;
     }
