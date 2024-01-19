@@ -33,3 +33,5 @@
 /Users/joegilberto/SEI/projects/hurdat2-assignment/service/obj/Debug/net7.0/service.pdb
 /Users/joegilberto/SEI/projects/hurdat2-assignment/service/obj/Debug/net7.0/service.genruntimeconfig.cache
 /Users/joegilberto/SEI/projects/hurdat2-assignment/service/obj/Debug/net7.0/ref/service.dll
+/Users/joegilberto/SEI/projects/hurdat2-assignment/service/bin/Debug/net7.0/Data/fl-state.json
+/Users/joegilberto/SEI/projects/hurdat2-assignment/service/bin/Debug/net7.0/Newtonsoft.Json.dll

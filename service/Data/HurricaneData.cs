@@ -33,9 +33,7 @@ namespace service.Data
 
                     //Clears the cache to start adding to a new Hurricane instance
                     cache = new Hurricane(lines[i]);
-                }
-                else
-                {
+                } else {
                     //If the line is not a header, it is made into a new TrackEntry instance and added to the cached Hurricane
                     cache.addTrackEntries(new TrackEntry(lines[i]));
                 }
