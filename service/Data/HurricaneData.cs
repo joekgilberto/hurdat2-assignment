@@ -6,17 +6,21 @@ namespace service.Data
 {
 	public class HurricaneData
 	{
-        public IEnumerable<string> Hurricanes
+        public List<string> Hurricanes
         { get; set; }
 
         public HurricaneData()
         {
             Hurricanes = File.ReadAllLines("./Data/hurdat2-1851-2022-050423.txt").ToList();
 
-            foreach(string line in Hurricanes)
-            {
-                Console.WriteLine(line);
-            }
+            Hurricane test = new Hurricane(Hurricanes[0]);
+
+            Console.WriteLine(test.ToString());
+
+            //foreach(string line in Hurricanes)
+            //{
+            //    Console.WriteLine(line);
+            //}
         }
     }
 }

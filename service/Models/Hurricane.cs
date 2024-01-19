@@ -29,6 +29,7 @@ namespace service.Models
         public int TrackEntryCount
         { get; set; }
 
+        [Required]
         public List<TrackEntry> TrackEntries
         { get; set; }
 
@@ -48,7 +49,7 @@ namespace service.Models
             AtcfNumber = atcfNumber;
 
             int year = 0;
-            Int32.TryParse(lineList[0].Substring(4, 8), out year);
+            Int32.TryParse(lineList[0].Substring(4), out year);
             Year = year;
 
             Name = lineList[1];
@@ -64,6 +65,11 @@ namespace service.Models
         {
             TrackEntries.Add(trackEntry);
         }
-	}
+
+        public override string ToString()
+        {
+            return $"Basin: {Basin}; AtcfNumber: {AtcfNumber}; Year: {Year}; Name: {Name}; TrackEntryCount:{TrackEntryCount}";
+        }
+    }
 }
 

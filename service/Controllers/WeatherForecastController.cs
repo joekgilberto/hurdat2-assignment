@@ -21,10 +21,10 @@ public class WeatherForecastController : ControllerBase
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
-    public IEnumerable<string> Get()
+    public List<string> Get()
     {
         var context = new HurricaneData();
-        IEnumerable<string> hurricanes = context.Hurricanes;
+        List<string> hurricanes = context.Hurricanes;
         return hurricanes;
         //return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         //{
