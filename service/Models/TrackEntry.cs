@@ -1,99 +1,89 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using service.CustomValidation;
 
 namespace service.Models
 {
+    //Creates the model for TrackEntry
     public class TrackEntry
     {
-        [Required]
-        [Range(1851, 2022)]
+        //Creates a Year integer property
         public int Year
         { get; set; }
 
-        [Required]
-        [Range(1, 12)]
+        //Creates a Month integer property
         public int Month
         { get; set; }
 
-        [Required]
-        [Range(1, 31)]
+        //Creates a Day integer property
         public int Day
         { get; set; }
 
-        [Required]
-        [Range(0, 18)]
+        //Creates a Hour integer property
         public int Hour
         { get; set; }
 
-        [Required]
-        [Range(0, 59)]
+        //Creates a Minute integer property
         public int Minute
         { get; set; }
 
-        [Required]
-        [RecordId(ErrorMessage = "RecordId must be N/A, C, G, I, L, P, R, S, T, or W.")]
-        [StringLength(3, MinimumLength = 1, ErrorMessage = "RecordId must be 1 to 3 characters long.")]
+        //Creates a RecordId string property
         public string RecordId
         { get; set; }
 
-        [Required]
-        [Status(ErrorMessage = "Status must be TD, TS, HU, EX, SD, SS, LO, WV, or DB.")]
-        [StringLength(2, MinimumLength = 2, ErrorMessage = "Status must be 2 characters long.")]
+        //Creates a Status string property
         public string Status
         { get; set; }
 
-        [Required]
+        //Creates a Latitude double property
         public double Latitude
         { get; set; }
 
-        [Required]
-        [LatitudeHemisphere(ErrorMessage = "LatitudeHemisphere must be North or West")]
+        //Creates a LatitudeHemisphere string property
         public string LatitudeHemisphere
         { get; set; }
 
-        [Required]
+        //Creates a Longitude double property
         public double Longitude
         { get; set; }
 
-        [Required]
-        [LongitudeHemisphere(ErrorMessage = "LongitudeHemisphere must be West or East")]
+        //Creates a LongitudeHemisphere string property
         public string LongitudeHemisphere
         { get; set; }
 
-        [Required]
-        [Range(0,999)]
+        //Creates a MaxWind integer property
         public int MaxWind
         { get; set;}
 
-        [Required]
-        [Range(0, 9999)]
+        //Creates a MaxWind integer property
         public int MinPressure
         { get; set; }
 
-        [Required]
+        //Creates a ThirtyFour WindRadii property
         public WindRadii ThirtyFour
         { get; set; }
 
-        [Required]
+        //Creates a Fifty WindRadii property
         public WindRadii Fifty
         { get; set; }
 
-        [Required]
+        //Creates a SixtyFour WindRadii property
         public WindRadii SixtyFour
         { get; set; }
 
-        [Required]
-        [Range(-999, 999)]
+        //Creates a MaxRadius integer property
         public int MaxRadius
         { get; set; }
 
+        //Creates a constructor with a parameter of an entry line from the .txt file
         public TrackEntry(string line)
 		{
+            //Splits the line into a list of strings by the commas
             List<string> lines = line.Split(",").ToList();
 
+            //Iterates over the list and cleans up each string by removing spaces from the line and adding them back to their indexed position
             for (int i = 0; i < lines.Count; i++)
             {
+                //If the second string is "  ", it is replaced with "N/A"
                 if (i == 2 && lines[i] == "  ")
                 {
                     lines[i] = "N/A";
@@ -102,77 +92,77 @@ namespace service.Models
                 lines[i] = lines[i].Trim();
             }
 
+            //Assigns Year to the first four characters of lines[0], parsed into an integer
             int year = 0;
             Int32.TryParse(lines[0].Substring(0,4), out year);
             Year = year;
 
+            //Assigns Month to the next two characters of lines[0], parsed into an integer
             int month = 0;
             Int32.TryParse(lines[0].Substring(4, 2), out month);
             Month = month;
 
+            //Assigns Day to the final characters of lines[0], parsed into an integer
             int day = 0;
             Int32.TryParse(lines[0].Substring(6), out day);
             Day = day;
 
+            //Assigns Hour to the first two characters of lines[1], parsed into an integer
             int hour = 0;
             Int32.TryParse(lines[1].Substring(0,2), out hour);
             Hour = hour;
 
+            //Assigns Hour to the remaining characters of lines[1], parsed into an integer
             int minute = 0;
             Int32.TryParse(lines[1].Substring(2), out minute);
             Minute = minute;
 
+            //Assigns RecordId to lines[2]
             RecordId = lines[2];
 
+            //Assigns Status to lines[3]
             Status = lines[3];
 
+            //Assigns LatitudeHemisphere to the last character of lines[4]
             LatitudeHemisphere = lines[4][lines[4].Length - 1].ToString();
 
-            string latitude = "";
-            if (lines[4].Contains("N"))
-            {
-                latitude = lines[4].TrimEnd('N');
-            }
-            else if (lines[4].Contains("S"))
-            {
-                latitude = lines[4].TrimEnd('S');
-            }
-            latitude = latitude.Replace('.',',');
+            //Assigns Latitude to lines[4] exluding its last character, parsed into an double
+            string latitude = lines[4].TrimEnd(lines[4][lines[4].Length - 1]);
             Latitude = Convert.ToDouble(latitude);
 
+            //Assigns LongitudeHemisphere to the last character of lines[5]
             LongitudeHemisphere = lines[5][lines[5].Length - 1].ToString();
 
-            string longitude = "";
-            if (lines[5].Contains("W"))
-            {
-                longitude = lines[5].TrimEnd('W');
-            }
-            else if (lines[5].Contains("E"))
-            {
-                longitude = lines[5].TrimEnd('E');
-            }
-            longitude = longitude.Replace('.', ',');
+            //Assigns Longitude to lines[5] exluding its last character, parsed into an double
+            string longitude = lines[5].TrimEnd(lines[5][lines[5].Length - 1]);
             Longitude = Convert.ToDouble(longitude);
 
+            //Assigns MaxWind to lines[6] exluding its last character, parsed into an integer
             int maxWind = 0;
             Int32.TryParse(lines[6], out maxWind);
             MaxWind = maxWind;
 
+            //Assigns MinPressure to lines[7] exluding its last character, parsed into an integer
             int minPressure = 0;
             Int32.TryParse(lines[7], out minPressure);
             MinPressure = minPressure;
 
+            //Assigns ThirtyFour to a new instance of WindRadii, containing lines[8], lines[9], lines[10], and lines[11]
             ThirtyFour = new WindRadii(lines[8], lines[9], lines[10], lines[11]);
 
+            //Assigns Fifty to a new instance of WindRadii, containing lines[12], lines[13], lines[14], and lines[15]
             Fifty = new WindRadii(lines[12], lines[13], lines[14], lines[15]);
 
+            //Assigns SixtyFour to a new instance of WindRadii, containing lines[16], lines[17], lines[18], and lines[19]
             SixtyFour = new WindRadii(lines[16], lines[17], lines[18], lines[19]);
 
+            //Assigns MaxRadius to lines[20] exluding its last character, parsed into an integer
             int maxRadius = 0;
             Int32.TryParse(lines[20], out maxRadius);
             MaxRadius = maxRadius;
         }
 
+        //Overrides the existing ToString() method to return a string of the TrackEntry's properties
         public override string ToString()
         {
             return $"Year: {Year}; Month: {Month}; Day: {Day}; Hour: {Hour}; Minute: {Minute}; RecordId: {RecordId}; Latitude: {Latitude}{LatitudeHemisphere}; Longitude:{Longitude}{LongitudeHemisphere}; MaxWind: {MaxWind}; MinPressure: {MinPressure}; 34 kt (NE, SE, SW, NW): {ThirtyFour.NE}{ThirtyFour.SE}{ThirtyFour.SW}{ThirtyFour.NW}; 50 kt (NE, SE, SW, NW): {Fifty.NE}{Fifty.SE}{Fifty.SW}{Fifty.NW}; 50 kt (NE, SE, SW, NW): {SixtyFour.NE}{SixtyFour.SE}{SixtyFour.SW}{SixtyFour.NW}; MaxRadius: {MaxRadius};";

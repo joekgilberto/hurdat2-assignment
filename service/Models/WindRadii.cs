@@ -3,42 +3,44 @@ using System.ComponentModel.DataAnnotations;
 
 namespace service.Models
 {
-	public class WindRadii
+    //Creates the model for WindRadii
+    public class WindRadii
 	{
-        [Required]
-        [Range(-999, 999)]
+        //Creates a NE integer property
         public int NE
 		{ get; set; }
 
-        [Required]
-        [Range(-999, 999)]
+        //Creates a SE integer property
         public int SE
         { get; set; }
 
-        [Required]
-        [Range(-999, 999)]
+        //Creates a SW integer property
         public int SW
         { get; set; }
 
-        [Required]
-        [Range(-999, 999)]
+        //Creates a NW integer property
         public int NW
         { get; set; }
 
+        //Creates a constructor with four string parameter
         public WindRadii(string ne, string se, string sw, string nw)
 		{
+            //Assigns NE to ne, parsed into an integer
             int covnertedNe = 0;
             Int32.TryParse(ne, out covnertedNe);
             NE = covnertedNe;
 
+            //Assigns SE to se, parsed into an integer
             int covnertedSe = 0;
             Int32.TryParse(se, out covnertedSe);
             SE = covnertedSe;
 
+            //Assigns SW to sw, parsed into an integer
             int covnertedSw = 0;
             Int32.TryParse(sw, out covnertedSw);
             SW = covnertedSw;
 
+            //Assigns NW to nw, parsed into an integer
             int covnertedNw = 0;
             Int32.TryParse(nw, out covnertedNw);
             NW = covnertedNw;
