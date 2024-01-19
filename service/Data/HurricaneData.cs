@@ -6,24 +6,30 @@ namespace service.Data
 {
 	public class HurricaneData
 	{
-        public List<string> Hurricanes
+        public List<Hurricane> Hurricanes
         { get; set; }
 
         public HurricaneData()
         {
-            Hurricanes = File.ReadAllLines("./Data/hurdat2-1851-2022-050423.txt").ToList();
+            List<string> lines = File.ReadAllLines("./Data/hurdat2-1851-2022-050423.txt").ToList();
 
-            Hurricane testOne = new Hurricane(Hurricanes[0]);
+            Hurricane cache = new Hurricane(lines[0]);
+            List <Hurricane> store = new List<Hurricane>();
 
-            TrackEntry testTwo = new TrackEntry(Hurricanes[5]);
+            for (int i = 1; i < lines.Count; i++)
+            {
+                if (lines[i].Length == 37)
+                {
+                    store.Add(cache);
+                    cache = new Hurricane(lines[i]);
+                }
+                else
+                {
+                    cache.addTrackEntries(new TrackEntry(lines[i]));
+                }
+            }
 
-            Console.WriteLine(testOne.ToString());
-            Console.WriteLine(testTwo.ToString());
-
-            //foreach(string line in Hurricanes)
-            //{
-            //    Console.WriteLine(line);
-            //}
+            Hurricanes = store;
         }
     }
 }
