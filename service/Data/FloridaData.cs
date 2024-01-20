@@ -13,6 +13,7 @@ namespace service.Data
         public List<List<List<List<double>>>> Coordinates
 		{ get; set; }
 
+        //TODO: DELETE
         public List<GeoPolygon> Maps
         { get; set; }
 
@@ -25,6 +26,7 @@ namespace service.Data
 			Florida = florida;
 			Coordinates = florida.Features.UnnamedObject[0].Geometry.Coordinates;
 
+            //TODO: DELETE
             Maps = new List<GeoPolygon>();
 
             List<GeoPosition> positions = new List<GeoPosition>();

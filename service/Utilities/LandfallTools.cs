@@ -1,5 +1,4 @@
 ﻿using System;
-using Azure.Core.GeoJson;
 using service.Data;
 using service.Models;
 using NetTopologySuite.Geometries;
@@ -46,7 +45,7 @@ namespace service.Utilities
                     latitude = latitude * -1;
                 }
 
-                Point currentPoint = new Point(new Coordinate(logitude, latitude));
+                Point currentPoint = new Point(new Coordinate(latitude,logitude));
 
                 foreach (List<List<List<double>>> coordGroup in _florida.Coordinates)
                 {
@@ -54,7 +53,7 @@ namespace service.Utilities
 
                     for(int i = 0; i < coordGroup[0].Count; i++)
                     {
-                        Coordinate addedCoord = new Coordinate(coordGroup[0][i][0], coordGroup[0][i][1]);
+                        Coordinate addedCoord = new Coordinate(coordGroup[0][i][1],coordGroup[0][i][0]);
                         coordList[i] = addedCoord;
                     }
 
@@ -64,9 +63,13 @@ namespace service.Utilities
 
                     if (passes)
                     {
-                        Console.WriteLine(hurricane.ToString());
-                        Console.WriteLine(entry.ToString());
-                        Console.WriteLine("");
+                        if(hurricane.Year>1900 && entry.Status=="HU")
+                        {
+                            Console.WriteLine(hurricane.ToString());
+                            Console.WriteLine(entry.ToString());
+                            Console.WriteLine("");
+                        }
+                        
                         return true;
                     }
 
