@@ -19,14 +19,7 @@ namespace service.Data
 
 			Florida florida = new Florida(json);
 			Florida = florida;
-
-
-            Console.WriteLine(json.GetType());
-
-			var coordinates = json.RootElement.GetProperty("features")[0].GetProperty("geometry").GetProperty("coordinates").Deserialize<List<List<List<List<double>>>>>();
-			Console.WriteLine(coordinates[0][0][0]);
-
-            Coordinates = coordinates;
+			Coordinates = florida.Features.UnnamedObject[0].Geometry.Coordinates;
         }
 	}
 }

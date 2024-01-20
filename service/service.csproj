@@ -13,16 +13,21 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.15" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Azure.Core" Version="1.37.0" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Models\" />
     <None Remove="Data\" />
     <None Remove="Utilities\" />
+    <None Remove="Models\Florida\" />
+    <None Remove="Models\Hurricane\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Data\" />
     <Folder Include="Utilities\" />
+    <Folder Include="Models\Florida\" />
+    <Folder Include="Models\Hurricane\" />
   </ItemGroup>
 </Project>

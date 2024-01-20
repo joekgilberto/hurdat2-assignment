@@ -165,7 +165,7 @@ namespace service.Models
         //Overrides the existing ToString() method to return a string of the TrackEntry's properties
         public override string ToString()
         {
-            return $"Year: {Year}; Month: {Month}; Day: {Day}; Hour: {Hour}; Minute: {Minute}; RecordId: {RecordId}; Latitude: {Latitude}{LatitudeHemisphere}; Longitude:{Longitude}{LongitudeHemisphere}; MaxWind: {MaxWind}; MinPressure: {MinPressure}; 34 kt (NE, SE, SW, NW): {ThirtyFour.NE}{ThirtyFour.SE}{ThirtyFour.SW}{ThirtyFour.NW}; 50 kt (NE, SE, SW, NW): {Fifty.NE}{Fifty.SE}{Fifty.SW}{Fifty.NW}; 50 kt (NE, SE, SW, NW): {SixtyFour.NE}{SixtyFour.SE}{SixtyFour.SW}{SixtyFour.NW}; MaxRadius: {MaxRadius};";
+            return $"Year: {Year}; Month: {Month}; Day: {Day}; Hour: {Hour}; Minute: {Minute}; RecordId: {RecordId};  Status: {Status}; Latitude: {Latitude}{LatitudeHemisphere}; Longitude: {Longitude}{LongitudeHemisphere}; MaxWind: {MaxWind}; MinPressure: {MinPressure}; 34 kt (NE, SE, SW, NW): {ThirtyFour.NE}{ThirtyFour.SE}{ThirtyFour.SW}{ThirtyFour.NW}; 50 kt (NE, SE, SW, NW): {Fifty.NE}{Fifty.SE}{Fifty.SW}{Fifty.NW}; 50 kt (NE, SE, SW, NW): {SixtyFour.NE}{SixtyFour.SE}{SixtyFour.SW}{SixtyFour.NW}; MaxRadius: {MaxRadius};";
         }
     }
 }

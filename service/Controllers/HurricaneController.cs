@@ -15,7 +15,7 @@ public class HurricaneController : ControllerBase
 
     private readonly FloridaData _florida;
 
-    private readonly FloridaLandfall _landfall;
+    private readonly LandfallTools _landfallTools;
 
 
     //Creates a constructor for HurricaneController
@@ -24,7 +24,7 @@ public class HurricaneController : ControllerBase
         //Upon creation, initiates an instance of HurricaneData and assigns it to the property _context, working as a data source for the application
         _context = new HurricaneData();
         _florida = new FloridaData();
-        _landfall = new FloridaLandfall();
+        _landfallTools = new LandfallTools();
 
     }
 
@@ -44,9 +44,10 @@ public class HurricaneController : ControllerBase
     {
         List<Hurricane> hurricanes = _context.Hurricanes;
 
-        var landfalls = hurricanes.Where(h => _landfall.IsHurricane(h) && h.Year > 1900);
+        var landfalls = hurricanes.Where(h => _landfallTools.IsHurricane(h) && _landfallTools.Landed(h) && h.Year > 1900);
 
-        List <Hurricane> floridaHurricanes = landfalls.ToList();
+
+        List<Hurricane> floridaHurricanes = landfalls.ToList();
 
         return floridaHurricanes;
     }
