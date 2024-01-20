@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Drawing;
 using Azure.Core.GeoJson;
 using service.Data;
 using service.Models;
+using NetTopologySuite.Geometries;
 
 namespace service.Utilities
 {
@@ -11,48 +11,9 @@ namespace service.Utilities
 
         private readonly FloridaData _florida;
 
-        private List<GeoPolygon> _maps;
-
-        private List<GeoBoundingBox> _boxes;
-
         public LandfallTools()
 		{
             _florida = new FloridaData();
-
-            _maps = new List<GeoPolygon>();
-
-            _boxes = new List<GeoBoundingBox>();
-
-            List<GeoPosition> positions = new List<GeoPosition>();
-
-            foreach(List<List<List<double>>> coordinateGroup in _florida.Coordinates)
-            {
-                double maxX = -180;
-                double minX = 0;
-                double maxY = 0;
-                double minY = 180;
-
-                foreach (List<List<double>> coordinates in coordinateGroup)
-                {
-                    for (int i = 0; i < coordinates.Count; i++)
-                    {
-                        positions.Add(new GeoPosition(coordinates[i][0], coordinates[i][1]));
-                        maxX = Math.Max(maxX, coordinates[i][0]);
-                        minX = Math.Min(minX, coordinates[i][0]);
-                        maxY = Math.Max(maxX, coordinates[i][1]);
-                        minY = Math.Min(minY, coordinates[i][1]);
-                    }
-                }
-
-                GeoBoundingBox box = new GeoBoundingBox(minX,minY,maxX,maxY);
-                GeoPolygon cache = new GeoPolygon(positions);
-
-                _maps.Add(cache);
-                _boxes.Add(box);
-
-                positions = new List<GeoPosition>();
-
-            }
         }
 
         public bool IsHurricane(Hurricane hurricane)
@@ -72,23 +33,46 @@ namespace service.Utilities
         {
             foreach(TrackEntry entry in hurricane.TrackEntries)
             {
-                foreach (GeoBoundingBox coors in _boxes)
-                {
-                    double latitude = entry.Latitude;
-                    double longitude = entry.Longitude;
+                double logitude = entry.Longitude;
+                double latitude = entry.Latitude;
 
-                    if(entry.LongitudeHemisphere.Contains('W'))
+                if (entry.LongitudeHemisphere.Contains('W'))
+                {
+                    logitude = logitude * -1;
+                }
+
+                if (entry.LatitudeHemisphere.Contains('S'))
+                {
+                    latitude = latitude * -1;
+                }
+
+                Point currentPoint = new Point(new Coordinate(logitude, latitude));
+
+                foreach (List<List<List<double>>> coordGroup in _florida.Coordinates)
+                {
+                    Coordinate[] coordList = new Coordinate[coordGroup[0].Count];
+
+                    for(int i = 0; i < coordGroup[0].Count; i++)
                     {
-                        longitude = longitude * -1;
+                        Coordinate addedCoord = new Coordinate(coordGroup[0][i][0], coordGroup[0][i][1]);
+                        coordList[i] = addedCoord;
                     }
 
-                    if ((latitude >= coors.South && latitude <= coors.North) && (longitude >= coors.West && longitude <= coors.East))
+                    Polygon section = new Polygon(new LinearRing(coordList));
+
+                    bool passes = section.Contains(currentPoint);
+
+                    if (passes)
                     {
+                        Console.WriteLine(hurricane.ToString());
+                        Console.WriteLine(entry.ToString());
+                        Console.WriteLine("");
                         return true;
                     }
+
                 }
             }
-
+            
             return false;
         }
 

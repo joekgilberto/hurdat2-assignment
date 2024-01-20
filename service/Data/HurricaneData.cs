@@ -38,6 +38,8 @@ namespace service.Data
                     cache.addTrackEntries(new TrackEntry(lines[i]));
                 }
             }
+            //Adds final hurricane in cache to the store
+            store.Add(cache);
 
             //Sets the Hurricane property to the store of Hurricane instances once the entire file has been read.
             Hurricanes = store;

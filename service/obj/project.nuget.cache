@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "r0VEiz7HkmkbOPbuw4og0giHbLBf9X/HUQ6U7hfCuTX2i4tFNafDPybwC8/EcgCVVr43VXN73nOakEUe263/8A==",
+  "dgSpecHash": "qTSzcMZwqgQMX/AJS84XYzr+B0k9SOtvAGPpgikTNrL6say/wAS0JCqadxmwavl7VjY+H4OtkCflhm2YD/4F2w==",
   "success": true,
   "projectFilePath": "/Users/joegilberto/SEI/projects/hurdat2-assignment/service/service.csproj",
   "expectedPackageFiles": [
@@ -20,12 +20,15 @@
     "/Users/joegilberto/.nuget/packages/microsoft.extensions.options/7.0.0/microsoft.extensions.options.7.0.0.nupkg.sha512",
     "/Users/joegilberto/.nuget/packages/microsoft.extensions.primitives/7.0.0/microsoft.extensions.primitives.7.0.0.nupkg.sha512",
     "/Users/joegilberto/.nuget/packages/microsoft.openapi/1.4.3/microsoft.openapi.1.4.3.nupkg.sha512",
+    "/Users/joegilberto/.nuget/packages/microsoft.spatial/7.20.0/microsoft.spatial.7.20.0.nupkg.sha512",
+    "/Users/joegilberto/.nuget/packages/nettopologysuite/2.5.0/nettopologysuite.2.5.0.nupkg.sha512",
     "/Users/joegilberto/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512",
     "/Users/joegilberto/.nuget/packages/swashbuckle.aspnetcore/6.5.0/swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
     "/Users/joegilberto/.nuget/packages/swashbuckle.aspnetcore.swagger/6.5.0/swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
     "/Users/joegilberto/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.5.0/swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
     "/Users/joegilberto/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.5.0/swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512",
     "/Users/joegilberto/.nuget/packages/system.diagnostics.diagnosticsource/6.0.1/system.diagnostics.diagnosticsource.6.0.1.nupkg.sha512",
+    "/Users/joegilberto/.nuget/packages/system.memory/4.5.4/system.memory.4.5.4.nupkg.sha512",
     "/Users/joegilberto/.nuget/packages/system.memory.data/1.0.2/system.memory.data.1.0.2.nupkg.sha512",
     "/Users/joegilberto/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512",
     "/Users/joegilberto/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",

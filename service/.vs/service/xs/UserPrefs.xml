@@ -6,10 +6,14 @@
         <State name="__root__">
           <Node name="service">
             <Node name="service">
+              <Node name="Dependencies" selected="True" />
               <Node name="Controllers" expanded="True" />
-              <Node name="CustomValidation" expanded="True" />
-              <Node name="Properties" expanded="True" />
-              <Node name="Program.cs" selected="True" />
+              <Node name="Models" expanded="True">
+                <Node name="Florida" expanded="True" />
+                <Node name="Hurricane" expanded="True" />
+              </Node>
+              <Node name="Utilities" expanded="True" />
+              <Node name="appsettings.json" expanded="True" />
             </Node>
           </Node>
         </State>
