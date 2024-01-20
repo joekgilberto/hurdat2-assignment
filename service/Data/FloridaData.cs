@@ -13,10 +13,6 @@ namespace service.Data
         public List<List<List<List<double>>>> Coordinates
 		{ get; set; }
 
-        //TODO: DELETE
-        public List<GeoPolygon> Maps
-        { get; set; }
-
         public FloridaData()
 		{
 			string jsonString = File.ReadAllText("./Data/fl-state.json");
@@ -25,30 +21,6 @@ namespace service.Data
 			Florida florida = new Florida(json);
 			Florida = florida;
 			Coordinates = florida.Features.UnnamedObject[0].Geometry.Coordinates;
-
-            //TODO: DELETE
-            Maps = new List<GeoPolygon>();
-
-            List<GeoPosition> positions = new List<GeoPosition>();
-
-            foreach (List<List<List<double>>> coordinateGroup in Coordinates)
-            {
-
-                foreach (List<List<double>> coordinates in coordinateGroup)
-                {
-                    for (int i = 0; i < coordinates.Count; i++)
-                    {
-                        positions.Add(new GeoPosition(coordinates[i][0], coordinates[i][1]));
-                    }
-                }
-
-                GeoPolygon cache = new GeoPolygon(positions);
-
-                Maps.Add(cache);
-
-                positions = new List<GeoPosition>();
-
-            }
         }
 	}
 }

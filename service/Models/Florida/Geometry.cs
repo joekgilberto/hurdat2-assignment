@@ -15,7 +15,6 @@ namespace service.Models
 		{
             Type = json.RootElement.GetProperty("features")[0].GetProperty("geometry").GetProperty("type").Deserialize<string>();
             Coordinates = json.RootElement.GetProperty("features")[0].GetProperty("geometry").GetProperty("coordinates").Deserialize<List<List<List<List<double>>>>>();
-
         }
     }
 }

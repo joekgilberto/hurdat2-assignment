@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using service;
+using Microsoft.AspNetCore.Mvc;
 using service.Models;
 using service.Data;
-using service.Utilities;
 
 namespace service.Controllers;
 
@@ -13,19 +13,11 @@ public class HurricaneController : ControllerBase
     //Creates a property of _context to hold an instance of HurricaneData
     private readonly HurricaneData _context;
 
-    private readonly FloridaData _florida;
-
-    private readonly LandfallTools _landfallTools;
-
-
     //Creates a constructor for HurricaneController
     public HurricaneController()
     {
         //Upon creation, initiates an instance of HurricaneData and assigns it to the property _context, working as a data source for the application
         _context = new HurricaneData();
-        _florida = new FloridaData();
-        _landfallTools = new LandfallTools();
-
     }
 
     //Creates a GetAll controller that returns all hurricanes
@@ -39,23 +31,33 @@ public class HurricaneController : ControllerBase
         return hurricanes;
     }
 
+    [HttpGet("{ATCFCode}")]
+    public Hurricane GetByATCFCode(string ATCFCode)
+    {
+        List<Hurricane> hurricanes = _context.Hurricanes.Where(h => h.FullATCFCode() == ATCFCode).ToList();
+
+        List<Hurricane> foundHurricanes = hurricanes.Where(h => h.LandedInFlorida()).ToList();
+
+        return hurricanes[0];
+    }
+
     [HttpGet("florida")]
     public List<Hurricane> GetFlorida()
     {
+        //Assigns the complete list of Hurricanes from the data set to the variable hurricanes
         List<Hurricane> hurricanes = _context.Hurricanes;
 
-        var landfalls = hurricanes.Where(h => _landfallTools.IsHurricane(h) && _landfallTools.Landed(h) && h.Year > 1900);
+        //Queries the complete list of Hurricanes by checking it against the .IsHurricane() and .Landed() methods from Tools, while checking that its year is from after 1900
+        List<Hurricane> landfalls = hurricanes.Where(h => h.LandedInFlorida() && h.Year > 1900).ToList();
 
-
-        List<Hurricane> floridaHurricanes = landfalls.ToList();
-
-        return floridaHurricanes;
+        //Returns said list of hurricanes
+        return landfalls;
     }
 
     [HttpGet("test")]
-    public Florida GetTest()
+    public string GetTest()
     {
-        return _florida.Florida;
+        return "test";
     }
 }
 

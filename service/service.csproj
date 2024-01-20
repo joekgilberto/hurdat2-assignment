@@ -21,15 +21,13 @@
   <ItemGroup>
     <None Remove="Models\" />
     <None Remove="Data\" />
-    <None Remove="Utilities\" />
-    <None Remove="Models\Florida\" />
     <None Remove="Models\Hurricane\" />
+    <None Remove="Models\Florida\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Data\" />
-    <Folder Include="Utilities\" />
-    <Folder Include="Models\Florida\" />
     <Folder Include="Models\Hurricane\" />
+    <Folder Include="Models\Florida\" />
   </ItemGroup>
 </Project>

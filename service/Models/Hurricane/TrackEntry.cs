@@ -162,6 +162,16 @@ namespace service.Models
             MaxRadius = maxRadius;
         }
 
+        public bool IsHurricane()
+        {
+            if (Status == "HU")
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         //Overrides the existing ToString() method to return a string of the TrackEntry's properties
         public override string ToString()
         {

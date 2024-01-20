@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using NetTopologySuite.Geometries;
+using service.Data;
 
 namespace service.Models
 {
@@ -73,10 +75,72 @@ namespace service.Models
             TrackEntries.Add(trackEntry);
         }
 
+        //Creates a method to return a string that represents the full ATCF code of a hurricane
+        public string FullATCFCode()
+        {
+            string neededZero = "0";
+
+            if (ATCFNumber < 10)
+            {
+                return $"{Basin}{neededZero}{ATCFNumber}{Year}";
+            } else
+            {
+                return $"{Basin}{ATCFNumber}{Year}";
+            }
+            
+        }
+
+
+        public bool LandedInFlorida()
+        {
+            FloridaData florida = new FloridaData();
+
+            foreach (TrackEntry entry in TrackEntries)
+            {
+                double longitude = entry.Longitude;
+                double latitude = entry.Latitude;
+
+                if (entry.LongitudeHemisphere.Contains('W'))
+                {
+                    longitude = longitude * -1;
+                }
+
+                if (entry.LatitudeHemisphere.Contains('S'))
+                {
+                    latitude = latitude * -1;
+                }
+
+                Point currentPoint = new Point(new Coordinate(latitude, longitude));
+
+                foreach (List<List<List<double>>> coordGroup in florida.Coordinates)
+                {
+                    Coordinate[] coordList = new Coordinate[coordGroup[0].Count];
+
+                    for (int i = 0; i < coordGroup[0].Count; i++)
+                    {
+                        Coordinate addedCoord = new Coordinate(coordGroup[0][i][1], coordGroup[0][i][0]);
+                        coordList[i] = addedCoord;
+                    }
+
+                    Polygon section = new Polygon(new LinearRing(coordList));
+
+                    bool passes = section.Contains(currentPoint);
+
+                    if (passes && entry.IsHurricane())
+                    {
+                        return true;
+                    }
+
+                }
+            }
+
+            return false;
+        }
+
         //Overrides the existing ToString() method to return a string of the Hurricane's properties
         public override string ToString()
         {
-            return $"Basin: {Basin}; ATCFNumber: {ATCFNumber}; Year: {Year}; Name: {Name}; TrackEntryCount:{TrackEntryCount}; TrackEntries.Count: {TrackEntries.Count};";
+            return $"ATCFCode: {FullATCFCode()}; Basin: {Basin}; ATCFNumber: {ATCFNumber}; Year: {Year}; Name: {Name}; TrackEntryCount:{TrackEntryCount}; TrackEntries.Count: {TrackEntries.Count};";
         }
     }
 }
