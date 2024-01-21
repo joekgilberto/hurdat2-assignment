@@ -1,5 +1,6 @@
 import './Footer.css';
 
+//Exports a Footer component with links to technologies used along with the developer's GitHub and portfolio
 export default function Footer() {
   return (
     <footer>

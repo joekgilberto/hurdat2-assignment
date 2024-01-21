@@ -1,7 +1,9 @@
 import './TrackEntry.css';
 
+//Imports custom utility functions
 import * as tools from '../../utilities/tools';
 
+//Exports TrackEntry component with entry and special props that displays entry details and, if special is true, marks the TrackEntry class as special
 export default function TrackEntry({ entry, special }) {
   return (
     <div className={`TrackEntry ${special ? 'special' : null}`}>

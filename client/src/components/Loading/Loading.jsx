@@ -1,5 +1,6 @@
 import './Loading.css';
 
+//Exports a Loading component with an idle animation
 export default function Loading() {
   return (
     <div className='Loading'>

@@ -1,5 +1,7 @@
+//Imports custom API call functions
 import * as hurricaneApi from './hurricane-api';
 
+//Exports getAllHurricanes function that calls upon hurricaneApi.index() in a try/catch, reverses the order of the results, and returns it
 export async function getAllHurricanes() {
     try {
         const response = await hurricaneApi.index();
@@ -11,13 +13,14 @@ export async function getAllHurricanes() {
     }
 }
 
+//Exports getHurricane function with an id as a parameter that calls upon hurricaneApi.show() in a try/catch, with said id parameter passed as an argument, and, if the response has a length, returns the first index, otherwise returning an empty object 
 export async function getHurricane(id) {
     try {
         const response = await hurricaneApi.show(id);
         if(response.length){
             return response[0];
         } else {
-            return null;
+            return {};
         }
     } catch (err) {
         console.log(err);

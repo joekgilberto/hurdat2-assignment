@@ -1,6 +1,8 @@
+//Imports createAsyncThunk and createSlice from Redux's toolkit, and hurricaneServices from hurricane-service for API calls
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import * as hurricaneServices from '../utilities/hurricane/hurricane-service';
 
+//Exports loadAllHurricanes async thunk that calls hurricaneServices.getAllHurricanes() and returns the result
 export const loadAllHurricanes = createAsyncThunk(
   'allHurricanes/loadAllHurricanes',
   async () => {
@@ -9,10 +11,11 @@ export const loadAllHurricanes = createAsyncThunk(
   }
 );
 
+//Exports the allHurricanesSlice Redux slice named allHurricanes with hurricanes state (initiated as an empty array), and loadAllHurricanes as an extra reducer
 export const allHurricanesSlice = createSlice({
   name: 'allHurricanes',
   initialState: {
-    allHurricanes: [],
+    hurricanes: [],
     isLoadingAllHurricanes: false,
     hasAllHurricanesError: false
   },
@@ -24,20 +27,24 @@ export const allHurricanesSlice = createSlice({
       })
       .addCase(loadAllHurricanes.fulfilled, (state, action) => {
         state.isLoadingAllHurricanes = false;
-        state.allHurricanes = action.payload;
+        state.hurricanes = action.payload;
       })
       .addCase(loadAllHurricanes.rejected, (state, action) => {
         state.isLoadingAllHurricanes = false;
         state.hasAllHurricanesError = true;
-        state.allHurricanes = [];
+        state.hurricanes = [];
       })
   },
 });
 
-export const selectAllHurricanes = (state) => state.allHurricanes.allHurricanes;
+//Exports allHuricanes state, the hurricanes array
+export const selectAllHurricanes = (state) => state.allHurricanes.hurricanes;
 
+//Exports allHuricanes state, the isLoadingAllHurricanes boolean, as isLoading
 export const isLoading = (state) => state.allHurricanes.isLoadingAllHurricanes;
 
+//Exports allHuricanes state, the hasAllHurricanesError boolean, as hasError
 export const hasError = (state) => state.allHurricanes.hasAllHurricanesError;
 
+//Default exports allHurricanesSlice reducer
 export default allHurricanesSlice.reducer;
