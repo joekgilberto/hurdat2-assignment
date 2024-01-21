@@ -36,7 +36,7 @@ public class HurricaneController : ControllerBase
     public List<Hurricane> GetByATCFCode(string ATCFCode)
     {
         //Returns a list of hurricanes where the hurricane's ATCF Code equeals the inputed string, which only includes one matching hurricane
-        List<Hurricane> hurricane = _context.Hurricanes.Where(h => h.FullATCFCode() == ATCFCode).ToList();
+        List<Hurricane> hurricane = _context.Hurricanes.Where(h => h.ATCFCode == ATCFCode).ToList();
 
         //Returns the found hurricane in list form (or an empty list if no hurricane is found)
         return hurricane;

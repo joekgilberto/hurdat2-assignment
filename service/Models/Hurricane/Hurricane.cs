@@ -8,6 +8,10 @@ namespace service.Models
     //Creates the model for Hurricane
 	public class Hurricane
 	{
+        //Creates a ATCFCode string property
+        public string ATCFCode
+        { get; set; }
+
         //Creates a Basin string property
         public string Basin
 		{ get; set; }
@@ -71,28 +75,28 @@ namespace service.Models
 
             //Assigns TrackEntries to an empty list of TrackEntry instances
             TrackEntries = new List<TrackEntry>();
+
+            //Builds the ATCFCode and assigns it to the string property of ATCFCode
+            //If ATCFNumber is less than 10, a 0 is added to the atcfCode string to align with the ATCF Code's format
+            string atcfCode;
+
+            if (ATCFNumber < 10)
+            {
+                atcfCode = $"{Basin}0{ATCFNumber}{Year}";
+            }
+            else
+            {
+                //Otherwise, neededZero is not added
+                atcfCode = $"{Basin}{ATCFNumber}{Year}";
+            }
+
+            ATCFCode = atcfCode;
         }
 
         //Creates a method to add TrackEntry instances to the TrackEntries property (a TrackEntry list)
         public void addTrackEntries(TrackEntry trackEntry)
         {
             TrackEntries.Add(trackEntry);
-        }
-
-        //Creates a method to return a string that represents the full ATCF code of a hurricane
-        public string FullATCFCode()
-        {
-            string neededZero = "0";
-
-            //If ATCFNumber is less than 10, the above string, neededZero, is added to the returned strong to align with the ATCF Code's format
-            if (ATCFNumber < 10)
-            {
-                return $"{Basin}{neededZero}{ATCFNumber}{Year}";
-            } else {
-                //Otherwise, neededZero is not added
-                return $"{Basin}{ATCFNumber}{Year}";
-            }
-            
         }
 
         //Creates a method to return a boolean that represents whether this instance of a Hurricane made landfall in Florida
@@ -171,7 +175,7 @@ namespace service.Models
         //Overrides the existing ToString() method to return a string of the Hurricane's properties
         public override string ToString()
         {
-            return $"ATCFCode: {FullATCFCode()}; Basin: {Basin}; ATCFNumber: {ATCFNumber}; Year: {Year}; Name: {Name}; TrackEntryCount:{TrackEntryCount}; TrackEntries.Count: {TrackEntries.Count};";
+            return $"ATCFCode: {ATCFCode}; Basin: {Basin}; ATCFNumber: {ATCFNumber}; Year: {Year}; Name: {Name}; TrackEntryCount:{TrackEntryCount}; TrackEntries.Count: {TrackEntries.Count};";
         }
     }
 }

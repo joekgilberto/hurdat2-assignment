@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import * as hurricaneServices from '../utilities/hurricane-service';
 
 export const loadCurrentHuricane = createAsyncThunk(
   'currentHurricane/loadCurrentHuricane',
@@ -13,13 +14,13 @@ export const currentHurricaneSlice = createSlice({
   initialState: {
     hurricane: {},
     isLoadingCurrentHuricane: false,
-    hasError: false
+    hasCurrentHurricaneError: false
   },
   extraReducers: (builder) => {
     builder
       .addCase(loadCurrentHuricane.pending, (state) => {
         state.isLoadingCurrentHuricane = true;
-        state.hasError = false;
+        state.hasCurrentHurricaneError = false;
       })
       .addCase(loadCurrentHuricane.fulfilled, (state, action) => {
         state.isLoadingCurrentHuricane = false;
@@ -27,7 +28,7 @@ export const currentHurricaneSlice = createSlice({
       })
       .addCase(loadCurrentHuricane.rejected, (state) => {
         state.isLoadingCurrentHuricane = false;
-        state.hasError = true;
+        state.hasCurrentHurricaneError = true;
         state.hurricane = {};
       })
   },
@@ -35,6 +36,8 @@ export const currentHurricaneSlice = createSlice({
 
 export const selectCurrentHurricane = (state) => state.currentHurricane.hurricane;
 
-export const isLoading = (state) => state.currentHurricane.isLoading;
+export const isLoading = (state) => state.currentHurricane.isLoadingCurrentHuricane;
+
+export const hasError = (state) => state.allHurricanes.hasCurrentHurricaneError;
 
 export default currentHurricaneSlice.reducer;

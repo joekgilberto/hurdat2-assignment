@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import allHurricanesReducer from '../features/allHurricanes/allHurricanesSlice';
-import currentHurricaneReducer from '../features/currentHurricane/currentHurricaneSlice';
+import allHurricanesReducer from '../features/allHurricanesSlice';
+import currentHurricaneReducer from '../features/currentHurricaneSlice';
 
 export default configureStore({
   reducer: {
