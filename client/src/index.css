@@ -12,9 +12,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(135deg, #3177eeff, #113d8aff);
+    background-color: #3177eeff;
     padding: 0;
     margin: 0;
+    position: fixed;
 }
 
 a,
