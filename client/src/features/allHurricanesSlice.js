@@ -25,7 +25,6 @@ export const allHurricanesSlice = createSlice({
       .addCase(loadAllHurricanes.fulfilled, (state, action) => {
         state.isLoadingAllHurricanes = false;
         state.allHurricanes = action.payload;
-        console.log(state.allHurricanes)
       })
       .addCase(loadAllHurricanes.rejected, (state, action) => {
         state.isLoadingAllHurricanes = false;

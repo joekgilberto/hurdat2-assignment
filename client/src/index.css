@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+body{
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+}
+
+*{
+    box-sizing: border-box;
+    font-family: 'Ubuntu', Helvetica, sans-serif;
+}
+
+a,button{
+    cursor: pointer;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+@keyframes rise {
+    0% {
+      transform: translateY(0);
+    }
+  
+    100% {
+      transform: translateY(-5px);
+    }
+}

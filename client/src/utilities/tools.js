@@ -16,6 +16,14 @@ export function status(status){
         DB: 'Disturbance',
         'N/A': 'System'
     }
-
     return statuses[status];
+}
+
+export function title(title)
+{
+    const firstLetter = title[0];
+    const rest = title.slice(1);
+    const restLower = rest.toLowerCase();
+
+    return `${firstLetter}${restLower}`
 }

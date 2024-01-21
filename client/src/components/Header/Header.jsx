@@ -6,7 +6,8 @@ export default function Header() {
   return (
     <header>
       <Link to="/">
-        <h1>HURDAT2 | Hurricanes in Florida</h1>
+        <h1>HURDAT2 Parsed</h1>
+        <h2>Hurricanes that made landfall in Florida from 1900 onward</h2>
       </Link>
     </header>
   );

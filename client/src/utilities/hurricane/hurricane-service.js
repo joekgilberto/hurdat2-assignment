@@ -3,7 +3,8 @@ import * as hurricaneApi from './hurricane-api';
 export async function getAllHurricanes() {
     try {
         const response = await hurricaneApi.index();
-        return response;
+        const data = response.reverse();
+        return data;
     } catch (err) {
         console.log(err);
         return err;
