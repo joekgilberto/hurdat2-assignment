@@ -1,6 +1,9 @@
 .AllHurricanes{
+    width: 100%;
+    height: 100%;
     display: flex;
-    padding: 30px 0;
     flex-direction: column;
     gap: 30px;
+    padding: 30px 20px;
+    overflow-y: scroll;
 }

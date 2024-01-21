@@ -1,6 +1,5 @@
 .Loading {
     width: 100%;
-    height: calc(100vh - 220px);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -10,10 +9,7 @@
 .Loading h2 {
     font-size: 50px;
     font-weight: 400;
-    background: -webkit-linear-gradient(#56aefc, #5672fc);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #c9daf8ce;
 }
 
 
@@ -25,7 +21,7 @@
 .loading-bar {
     width: 100px;
     height: 36px;
-    background-image: linear-gradient(45deg, #56aefc, #5672fc);
+    background-color: #c9daf8ce;
     box-shadow: 0 2.5px 0 #00000040;
     border-radius: 15px 0 0 15px;
     animation: back-and-forth 3s infinite;

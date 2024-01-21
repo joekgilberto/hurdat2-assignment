@@ -1,4 +1,10 @@
-main{
-    min-height: calc(100vh - 70px);
-    padding: 150px 40px 0 40px;
+main {
+    height: calc(100vh - 5vh - 170px);
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    overflow-y: scroll;
+    background-color: #00000073;
+    border-radius: 0 0 15px 15px;
+    box-shadow: 5px 5px 10px #00000060;
 }
