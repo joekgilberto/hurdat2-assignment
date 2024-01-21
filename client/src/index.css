@@ -31,15 +31,3 @@ a {
 .bold {
     font-weight: bold;
 }
-
-@keyframes rise {
-    0% {
-        background-color: #c9daf86f;
-        transform: translateY(0);
-    }
-
-    100% {
-        background-color: #c9daf8ce;
-        transform: translateY(-5px);
-    }
-}

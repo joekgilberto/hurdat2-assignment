@@ -20,7 +20,7 @@
     color: #fff;
     font-size: 35px;
     font-style: italic;
-    text-shadow: 0 3px 0 #00000020;
+    text-shadow: 0 2px 0 #00000040;
 }
 
 .Hurricane hr {
@@ -52,5 +52,18 @@
 @media only screen and (min-width: 2500px) {
     .Hurricane{
         max-width: 24%;
+    }
+}
+
+@keyframes rise {
+    0% {
+        background-color: #c9daf86f;
+        transform: translateY(0);
+    }
+
+    100% {
+        background-color: #c9daf8ce;
+        transform: translateY(-5px);
+        text-shadow: 0 2px 0 #00000040;
     }
 }
