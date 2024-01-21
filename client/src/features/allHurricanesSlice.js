@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import * as hurricaneServices from '../utilities/hurricane-service';
+import * as hurricaneServices from '../utilities/hurricane/hurricane-service';
 
-export const loadAllHuricanes = createAsyncThunk(
-  'allHurricanes/loadAllHuricanes',
+export const loadAllHurricanes = createAsyncThunk(
+  'allHurricanes/loadAllHurricanes',
   async () => {
     const data = await hurricaneServices.getAllHurricanes();
     return data;
@@ -14,22 +14,22 @@ export const allHurricanesSlice = createSlice({
   initialState: {
     allHurricanes: [],
     isLoadingAllHurricanes: false,
-    hasAllHurricaneError: false
+    hasAllHurricanesError: false
   },
   extraReducers: (builder) => {
     builder
-      .addCase(loadAllHuricanes.pending, (state) => {
+      .addCase(loadAllHurricanes.pending, (state) => {
         state.isLoadingAllHurricanes = true;
-        state.hasAllHurricaneError = false;
+        state.hasAllHurricanesError = false;
       })
-      .addCase(loadAllHuricanes.fulfilled, (state, action) => {
+      .addCase(loadAllHurricanes.fulfilled, (state, action) => {
         state.isLoadingAllHurricanes = false;
         state.allHurricanes = action.payload;
         console.log(state.allHurricanes)
       })
-      .addCase(loadAllHuricanes.rejected, (state, action) => {
+      .addCase(loadAllHurricanes.rejected, (state, action) => {
         state.isLoadingAllHurricanes = false;
-        state.hasAllHurricaneError = true;
+        state.hasAllHurricanesError = true;
         state.allHurricanes = [];
       })
   },
@@ -39,6 +39,6 @@ export const selectAllHurricanes = (state) => state.allHurricanes.allHurricanes;
 
 export const isLoading = (state) => state.allHurricanes.isLoadingAllHurricanes;
 
-export const hasError = (state) => state.allHurricanes.hasAllHurricaneError;
+export const hasError = (state) => state.allHurricanes.hasAllHurricanesError;
 
 export default allHurricanesSlice.reducer;

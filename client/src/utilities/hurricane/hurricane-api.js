@@ -3,9 +3,8 @@ const BASE_URL = process.env.REACT_APP_HURRICANE_URL;
 
 export async function index() {
     return axios
-        .get((`${BASE_URL}florida/`))
+        .get((`${BASE_URL}landfalls/`))
         .then((res) => {
-            console.log('api hit')
             return res.data
         })
         .catch((err) => console.log(err));

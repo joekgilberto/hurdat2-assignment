@@ -2,8 +2,8 @@ import './Main.css';
 
 import { Routes, Route } from 'react-router-dom'
 
-import AllHuricanes from "../../pages/AllHuricanes/AllHuricanes";
-import ShowHurricane from "../../pages/ShowHuricane/ShowHuricane";
+import AllHuricanes from "../../pages/AllHurricanes/AllHurricanes";
+import ShowHurricane from "../../pages/ShowHurricane/ShowHurricane";
 import Error from "../../pages/Error/Error";
 
 export default function Main() {
@@ -11,7 +11,7 @@ export default function Main() {
     <main>
       <Routes>
         <Route path="/" element={<AllHuricanes />} />
-        <Route path="/" element={<ShowHurricane />} />
+        <Route path="/:id" element={<ShowHurricane />} />
         <Route path={"/*"} element={<Error />} />
       </Routes>
     </main>

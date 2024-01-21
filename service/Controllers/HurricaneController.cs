@@ -16,8 +16,9 @@ public class HurricaneController : ControllerBase
     //Creates a constructor for HurricaneController
     public HurricaneController()
     {
-        //Upon creation, initiates an instance of HurricaneData and assigns it to the property _context, working as a data source for the application
-        _context = new HurricaneData();
+        //Initiates an instance of HurricaneData and assigns it to the property _context, working as a data source for the application
+        HurricaneData context = new HurricaneData();
+        _context = context;
     }
 
     //Creates a GetAll controller that returns all hurricanes
@@ -42,17 +43,14 @@ public class HurricaneController : ControllerBase
         return hurricane;
     }
 
-    //Creates a GetFlorida controller that returns all hurricanes that have landed in Florida during or after 1900
-    [HttpGet("florida")]
-    public List<Hurricane> GetFlorida()
+    //Creates a GetLandfalls controller that returns all landfalls
+    [HttpGet("landfalls")]
+    public List<Landfall> GetLandfalls()
     {
-        //Assigns the complete list of Hurricanes from the data set to the variable hurricanes
-        List<Hurricane> hurricanes = _context.Hurricanes;
+        //Assigns a List of Landfalls to the List of Landfalls kepy in the instance of HurricaneData
+        List<Landfall> landfalls = _context.Landfalls;
 
-        //Queries the complete list of Hurricanes by checking it against the class's .LandedInFlorida() method and checking that the year is 1900 or onward
-        List<Hurricane> landfalls = hurricanes.Where(h => h.LandedInFlorida() && h.Year > 1900).ToList();
-
-        //Returns said list of hurricanes
+        //Returns the List of Landfalls
         return landfalls;
     }
 

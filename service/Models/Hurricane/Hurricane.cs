@@ -36,8 +36,7 @@ namespace service.Models
         public List<TrackEntry> TrackEntries
         { get; set; }
 
-        //Creates a FloridaLandingIndex integer property, representing the index of the TrackEntry that makes landfall in Florida
-        public int FloridaLandingIndex
+        public int LandfallEntry
         { get; set; }
 
         //Creates a constructor with a parameter of an entry line from the .txt file
@@ -100,15 +99,12 @@ namespace service.Models
         }
 
         //Creates a method to return a boolean that represents whether this instance of a Hurricane made landfall in Florida
-        public bool LandedInFlorida()
+        public Landfall? createLandfall(FloridaData floridaData)
         {
-            //Creates a new instance of FloridaData
-            FloridaData floridaData = new FloridaData();
 
             //Iterates through the TrackEntries property
-            for (int i = 0; i < TrackEntries.Count; i++)
+            for(int i = 0; i < TrackEntries.Count; i++)
             {
-                //Assigns the current TrackEntry to entry
                 TrackEntry entry = TrackEntries[i];
 
                 //Assigns longitude and latitude doubles to the Longitude and Latitude properties of the selected TrackEntry
@@ -133,7 +129,7 @@ namespace service.Models
                 //Checks to ensure floridaData.Coordinates is not null, and if floridaData.Coordinates is null the method returns false
                 if (floridaData.Coordinates == null)
                 {
-                    return false;
+                    return null;
                 } else {
                     //Iterates through floridaData.Coordinates
                     foreach (List<List<List<double>>> coordGroup in floridaData.Coordinates)
@@ -156,11 +152,12 @@ namespace service.Models
                         //The polygon, section, checks if the currentPoint is in said section and saves the boolean return value to passes
                         bool passes = section.Contains(currentPoint);
 
-                        //If passes is true and the current TrackEntry's method, IsHurricane, returns true, the current index is saved to the FloridaLandingIndex property and the method returns true
-                        if (passes && entry.IsHurricane())
+                        //If passes is true, the current TrackEntry's method, IsHurricane, returns true, and the entry is from 1900 or later, the current index is saved to the LandfallEntry property and the method returns an instance of Landfall constructed with the ATCFCode and Name properties as well as the current entry
+                        if (passes && entry.IsHurricane() && entry.Year >= 1900)
                         {
-                            FloridaLandingIndex = i;
-                            return true;
+                            LandfallEntry = i;
+                            Landfall landfall = new Landfall(ATCFCode, Name, entry);
+                            return landfall;
                         }
 
                     }
@@ -169,7 +166,7 @@ namespace service.Models
             }
 
             //If true is not returned beforehand (because no coordinates in the TrackEntries property are found within the polyogns and/or because the entry that is found within the polygon is not a hurricane upon landing in Florida), the method defaults to returning false
-            return false;
+            return null;
         }
 
         //Overrides the existing ToString() method to return a string of the Hurricane's properties
