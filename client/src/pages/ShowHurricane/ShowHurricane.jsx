@@ -45,7 +45,7 @@ export default function ShowHurricane() {
         </div>
         <div className='track-header'>
           <p className='track-title'>Track Entries</p>
-          <button onClick={scroll}>Scroll To Landing</button>
+          <button onClick={scroll}>Scroll To Landfall</button>
         </div>
         <hr />
         <div className='track-entries' ref={trackRef}>
