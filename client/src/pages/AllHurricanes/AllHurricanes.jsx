@@ -27,9 +27,7 @@ export default function AllHurricanes() {
       {hurricanes.length ?
         hurricanes.map((h, idx) => {
           return (
-            <Link key={idx} to={`/${h.atcfCode}`}>
-              <Hurricane hurricane={h} />
-            </Link>
+              <Hurricane key={idx} hurricane={h} />
           )
         })
         :

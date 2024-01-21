@@ -14,6 +14,10 @@
     margin-bottom: 0;
 }
 
+.TrackEntry .time-date{
+    color: #00000073;
+}
+
 .TrackEntry.special{
     background-color: #c9daf8ce;
 }
