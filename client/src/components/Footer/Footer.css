@@ -12,3 +12,17 @@ footer{
 footer a:hover{
     text-decoration: underline;
 }
+
+@media only screen and (min-width: 510px) {
+    footer{
+        font-size: 12px;
+    }
+
+}
+
+@media only screen and (min-width: 690px) {
+    footer{
+        font-size: 14px;
+    }
+
+}
