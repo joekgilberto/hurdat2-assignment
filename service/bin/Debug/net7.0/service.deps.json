@@ -11,7 +11,6 @@
           "Azure.Core": "1.37.0",
           "Microsoft.AspNetCore.OpenApi": "7.0.11",
           "Microsoft.EntityFrameworkCore": "7.0.15",
-          "Microsoft.Spatial": "7.20.0",
           "NetTopologySuite": "2.5.0",
           "Newtonsoft.Json": "13.0.3",
           "Swashbuckle.AspNetCore": "6.5.0"
@@ -122,14 +121,6 @@
           "lib/netstandard2.0/Microsoft.OpenApi.dll": {
             "assemblyVersion": "1.4.3.0",
             "fileVersion": "1.4.3.0"
-          }
-        }
-      },
-      "Microsoft.Spatial/7.20.0": {
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.Spatial.dll": {
-            "assemblyVersion": "7.20.0.0",
-            "fileVersion": "7.20.0.41208"
           }
         }
       },
@@ -332,13 +323,6 @@
       "sha512": "sha512-rURwggB+QZYcSVbDr7HSdhw/FELvMlriW10OeOzjPT7pstefMo7IThhtNtDudxbXhW+lj0NfX72Ka5EDsG8x6w==",
       "path": "microsoft.openapi/1.4.3",
       "hashPath": "microsoft.openapi.1.4.3.nupkg.sha512"
-    },
-    "Microsoft.Spatial/7.20.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-nJLDCOv3qemN0XI5kmUN9h38Qw+ZQBoYtWwSGhPkDEiiZSDcAwLMgqbGNKmK3myhVWASCqXtOqrj5jUnGZrH/Q==",
-      "path": "microsoft.spatial/7.20.0",
-      "hashPath": "microsoft.spatial.7.20.0.nupkg.sha512"
     },
     "NetTopologySuite/2.5.0": {
       "type": "package",

@@ -274,19 +274,6 @@
           }
         }
       },
-      "Microsoft.Spatial/7.20.0": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Microsoft.Spatial.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Microsoft.Spatial.dll": {
-            "related": ".xml"
-          }
-        }
-      },
       "NetTopologySuite/2.5.0": {
         "type": "package",
         "dependencies": {
@@ -1104,23 +1091,6 @@
         "microsoft.openapi.nuspec"
       ]
     },
-    "Microsoft.Spatial/7.20.0": {
-      "sha512": "nJLDCOv3qemN0XI5kmUN9h38Qw+ZQBoYtWwSGhPkDEiiZSDcAwLMgqbGNKmK3myhVWASCqXtOqrj5jUnGZrH/Q==",
-      "type": "package",
-      "path": "microsoft.spatial/7.20.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net45/Microsoft.Spatial.dll",
-        "lib/net45/Microsoft.Spatial.xml",
-        "lib/netstandard1.1/Microsoft.Spatial.dll",
-        "lib/netstandard1.1/Microsoft.Spatial.xml",
-        "lib/netstandard2.0/Microsoft.Spatial.dll",
-        "lib/netstandard2.0/Microsoft.Spatial.xml",
-        "microsoft.spatial.7.20.0.nupkg.sha512",
-        "microsoft.spatial.nuspec"
-      ]
-    },
     "NetTopologySuite/2.5.0": {
       "sha512": "5/+2O2ADomEdUn09mlSigACdqvAf0m/pVPGtIPEPQWnyrVykYY0NlfXLIdkMgi41kvH9kNrPqYaFBTZtHYH7Xw==",
       "type": "package",
@@ -1482,7 +1452,6 @@
       "Azure.Core >= 1.37.0",
       "Microsoft.AspNetCore.OpenApi >= 7.0.11",
       "Microsoft.EntityFrameworkCore >= 7.0.15",
-      "Microsoft.Spatial >= 7.20.0",
       "NetTopologySuite >= 2.5.0",
       "Newtonsoft.Json >= 13.0.3",
       "Swashbuckle.AspNetCore >= 6.5.0"
@@ -1536,10 +1505,6 @@
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
             "version": "[7.0.15, )"
-          },
-          "Microsoft.Spatial": {
-            "target": "Package",
-            "version": "[7.20.0, )"
           },
           "NetTopologySuite": {
             "target": "Package",

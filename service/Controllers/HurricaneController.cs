@@ -31,32 +31,36 @@ public class HurricaneController : ControllerBase
         return hurricanes;
     }
 
+    //Creates a GetByATCFCode controller that returns a specific hurricane called by an ATCF Code, accepting a string labeled ATCFCode
     [HttpGet("{ATCFCode}")]
-    public Hurricane GetByATCFCode(string ATCFCode)
+    public List<Hurricane> GetByATCFCode(string ATCFCode)
     {
-        List<Hurricane> hurricanes = _context.Hurricanes.Where(h => h.FullATCFCode() == ATCFCode).ToList();
+        //Returns a list of hurricanes where the hurricane's ATCF Code equeals the inputed string, which only includes one matching hurricane
+        List<Hurricane> hurricane = _context.Hurricanes.Where(h => h.FullATCFCode() == ATCFCode).ToList();
 
-        List<Hurricane> foundHurricanes = hurricanes.Where(h => h.LandedInFlorida()).ToList();
-
-        return hurricanes[0];
+        //Returns the found hurricane in list form (or an empty list if no hurricane is found)
+        return hurricane;
     }
 
+    //Creates a GetFlorida controller that returns all hurricanes that have landed in Florida during or after 1900
     [HttpGet("florida")]
     public List<Hurricane> GetFlorida()
     {
         //Assigns the complete list of Hurricanes from the data set to the variable hurricanes
         List<Hurricane> hurricanes = _context.Hurricanes;
 
-        //Queries the complete list of Hurricanes by checking it against the .IsHurricane() and .Landed() methods from Tools, while checking that its year is from after 1900
+        //Queries the complete list of Hurricanes by checking it against the class's .LandedInFlorida() method and checking that the year is 1900 or onward
         List<Hurricane> landfalls = hurricanes.Where(h => h.LandedInFlorida() && h.Year > 1900).ToList();
 
         //Returns said list of hurricanes
         return landfalls;
     }
 
+    //Creates a GetTest test controller that returns the string "test" to help developers ensure the application is running
     [HttpGet("test")]
     public string GetTest()
     {
+        //Returns a string, "test"
         return "test";
     }
 }

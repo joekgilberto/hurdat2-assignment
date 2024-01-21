@@ -23,7 +23,7 @@ namespace service.Data
             List<Hurricane> store = new List<Hurricane>();
 
             //Creates a for loop starting on the second line of the .txt file and continues throughout each line of the file
-            for (int i = 1; i < lines.Count-1200; i++)
+            for (int i = 1; i < lines.Count; i++)
             {
                 //Identifies if a line is a header for a new hurricane
                 if (lines[i].Length == 37)

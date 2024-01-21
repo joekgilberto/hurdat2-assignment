@@ -24,12 +24,16 @@ namespace service.Models
         public string Name
         { get; set; }
 
-        //Creates an TrackEntryCount integer property
+        //Creates a TrackEntryCount integer property
         public int TrackEntryCount
         { get; set; }
 
         //Creates a TrackEntries property that is a list of TrackEntry instances
         public List<TrackEntry> TrackEntries
+        { get; set; }
+
+        //Creates a FloridaLandingIndex integer property, representing the index of the TrackEntry that makes landfall in Florida
+        public int FloridaLandingIndex
         { get; set; }
 
         //Creates a constructor with a parameter of an entry line from the .txt file
@@ -80,60 +84,87 @@ namespace service.Models
         {
             string neededZero = "0";
 
+            //If ATCFNumber is less than 10, the above string, neededZero, is added to the returned strong to align with the ATCF Code's format
             if (ATCFNumber < 10)
             {
                 return $"{Basin}{neededZero}{ATCFNumber}{Year}";
-            } else
-            {
+            } else {
+                //Otherwise, neededZero is not added
                 return $"{Basin}{ATCFNumber}{Year}";
             }
             
         }
 
-
+        //Creates a method to return a boolean that represents whether this instance of a Hurricane made landfall in Florida
         public bool LandedInFlorida()
         {
-            FloridaData florida = new FloridaData();
+            //Creates a new instance of FloridaData
+            FloridaData floridaData = new FloridaData();
 
-            foreach (TrackEntry entry in TrackEntries)
+            //Iterates through the TrackEntries property
+            for (int i = 0; i < TrackEntries.Count; i++)
             {
+                //Assigns the current TrackEntry to entry
+                TrackEntry entry = TrackEntries[i];
+
+                //Assigns longitude and latitude doubles to the Longitude and Latitude properties of the selected TrackEntry
                 double longitude = entry.Longitude;
                 double latitude = entry.Latitude;
 
+                //If the LongitudeHemisphere of the TrackEntry is W (for West), the logitude is made negative
                 if (entry.LongitudeHemisphere.Contains('W'))
                 {
                     longitude = longitude * -1;
                 }
 
+                //If the LatitudeHemisphere of the TrackEntry is S (for South), the latitude is made negative
                 if (entry.LatitudeHemisphere.Contains('S'))
                 {
                     latitude = latitude * -1;
                 }
 
+                //Creates a new instance of the Point class with a new instance of the Coordinate class passed as an argument to its constructor, with the latitude and longitude doubles passed to the Coordinate constructor
                 Point currentPoint = new Point(new Coordinate(latitude, longitude));
 
-                foreach (List<List<List<double>>> coordGroup in florida.Coordinates)
+                //Checks to ensure floridaData.Coordinates is not null, and if floridaData.Coordinates is null the method returns false
+                if (floridaData.Coordinates == null)
                 {
-                    Coordinate[] coordList = new Coordinate[coordGroup[0].Count];
-
-                    for (int i = 0; i < coordGroup[0].Count; i++)
+                    return false;
+                } else {
+                    //Iterates through floridaData.Coordinates
+                    foreach (List<List<List<double>>> coordGroup in floridaData.Coordinates)
                     {
-                        Coordinate addedCoord = new Coordinate(coordGroup[0][i][1], coordGroup[0][i][0]);
-                        coordList[i] = addedCoord;
+                        //Creates a new list of Coordinate that is the length of the first list of the coordGroup's length
+                        Coordinate[] coordList = new Coordinate[coordGroup[0].Count];
+
+                        //Iterates over the first list of a coordGroup
+                        for (int j = 0; j < coordGroup[0].Count; j++)
+                        {
+                            //For each set of cooridnates in the coordGroup's second list, it passes the latitude and longitude (second and first index of the final list) to the constructor of a new Coordinate instance
+                            //And assigns said the create coordinate to the current index of the coordList
+                            Coordinate addedCoord = new Coordinate(coordGroup[0][j][1], coordGroup[0][j][0]);
+                            coordList[j] = addedCoord;
+                        }
+
+                        //Creates a new Polygon with a new LinearRing passed as an argument to its constructor, with the coordList passed as the argument to the LinearRing constructor
+                        Polygon section = new Polygon(new LinearRing(coordList));
+
+                        //The polygon, section, checks if the currentPoint is in said section and saves the boolean return value to passes
+                        bool passes = section.Contains(currentPoint);
+
+                        //If passes is true and the current TrackEntry's method, IsHurricane, returns true, the current index is saved to the FloridaLandingIndex property and the method returns true
+                        if (passes && entry.IsHurricane())
+                        {
+                            FloridaLandingIndex = i;
+                            return true;
+                        }
+
                     }
-
-                    Polygon section = new Polygon(new LinearRing(coordList));
-
-                    bool passes = section.Contains(currentPoint);
-
-                    if (passes && entry.IsHurricane())
-                    {
-                        return true;
-                    }
-
                 }
+
             }
 
+            //If true is not returned beforehand (because no coordinates in the TrackEntries property are found within the polyogns and/or because the entry that is found within the polygon is not a hurricane upon landing in Florida), the method defaults to returning false
             return false;
         }
 

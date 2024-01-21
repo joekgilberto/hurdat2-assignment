@@ -162,13 +162,16 @@ namespace service.Models
             MaxRadius = maxRadius;
         }
 
+        //Creates a method to return a boolean that represents whether this instance of a TrackEntry has the Status property of HU (for Hurricane)
         public bool IsHurricane()
         {
+            //Checks if the Status property is a string, "HU", and returns true if so
             if (Status == "HU")
             {
                 return true;
             }
 
+            //Otherwise it returns false
             return false;
         }
 

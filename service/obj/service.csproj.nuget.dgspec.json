@@ -50,10 +50,6 @@
               "target": "Package",
               "version": "[7.0.15, )"
             },
-            "Microsoft.Spatial": {
-              "target": "Package",
-              "version": "[7.20.0, )"
-            },
             "NetTopologySuite": {
               "target": "Package",
               "version": "[2.5.0, )"
