@@ -1,0 +1,30 @@
+.TrackEntry {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    background-color: #c9daf86f;
+    box-shadow: 0 5px 5px #00000040;
+    border-radius: 10px;
+    padding: 0 20px;
+}
+
+.TrackEntry .record{
+    color: #fff;
+    font-size: 20px;
+    margin-bottom: 0;
+}
+
+.TrackEntry.special{
+    background-color: #c9daf8ce;
+}
+
+.TrackEntry.special h4{
+    color: #fff;
+    font-size: 30px;
+    text-shadow: 0 2px 0 #00000040;
+    margin: 15px 0 0 0;
+}
+
+.TrackEntry.special .record{
+    color: #000;
+}

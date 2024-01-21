@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadCurrentHurricane, selectCurrentHurricane, isLoading } from '../../features/currentHurricaneSlice';
+import * as tools from '../../utilities/tools';
 
 import Loading from '../../components/Loading/Loading';
 import TrackEntry from '../../components/TrackEntry/TrackEntry';
@@ -18,6 +19,7 @@ export default function ShowHurricane() {
 
   useEffect(() => {
     dispatch(loadCurrentHurricane(id));
+    console.log(hurricane)
   }, [dispatch]);
 
   if (loading) {
@@ -25,15 +27,23 @@ export default function ShowHurricane() {
   }
 
   return (
-    <div className="ShowHurricane">
-      <p>Name: {hurricane.name}</p>
-      <p>Year: {hurricane.year}</p>
-      <p>Bastin {hurricane.basin}</p>
-      {hurricane?.trackEntries?.map((entry,idx)=>{
-        return(
-          <TrackEntry key={idx} entry={entry} special={idx===hurricane.landfallEntry?true:false} />
-        )
-      })}
-    </div>
+    hurricane.name ?
+      <div className="ShowHurricane">
+        <div className='hurricane-title'>
+          <h3>{tools.named(tools.title(hurricane.name))}</h3>
+          <p>{hurricane.year}</p>
+        </div>
+        <p className='track-title'>Track Entries</p>
+        <hr />
+        <div className='track-entries'>
+          {hurricane.trackEntries?.map((entry, idx) => {
+            return (
+              <TrackEntry key={idx} entry={entry} special={idx === hurricane.landfallEntry ? true : false} />
+            )
+          })}
+        </div>
+      </div>
+      :
+      <Loading />
   );
 }

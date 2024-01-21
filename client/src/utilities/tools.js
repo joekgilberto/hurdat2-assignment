@@ -5,17 +5,18 @@ export function month(monthNumber){
 
 export function status(status){
     const statuses = {
-        TD: 'Tropical depression',
-        TS: 'Tropical storm',
-        HU: 'Hurricane',
-        EX: 'Extratropical cyclone',
-        SD: 'Subtropical depression',
-        SS: 'Subtropical storm',
-        LO: 'A low',
-        WV: 'Tropical wave',
-        DB: 'Disturbance',
-        'N/A': 'System'
-    }
+        TD: 'tropical depression',
+        TS: 'tropical storm',
+        HU: 'hurricane',
+        EX: 'extratropical cyclone',
+        SD: 'subtropical depression',
+        SS: 'subtropical storm',
+        LO: 'low',
+        WV: 'tropical wave',
+        DB: 'disturbance',
+        'N/A': 'system'
+    };
+
     return statuses[status];
 }
 
@@ -25,5 +26,13 @@ export function title(title)
     const rest = title.slice(1);
     const restLower = rest.toLowerCase();
 
-    return `${firstLetter}${restLower}`
+    return `${firstLetter}${restLower}`;
+}
+
+export function named(name){
+    if (name.toLowerCase() === 'unnamed'){
+        return `${name} Hurricane`;
+    } else {
+        return `Hurricane ${name}`;
+    };
 }
