@@ -1,5 +1,6 @@
 ﻿using System;
 using service.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace service.Data
 {
@@ -18,7 +19,8 @@ namespace service.Data
         public HurricaneData()
         {
             //Takes the lines of the hurdat2 .txt file and turns them into a list of strings stored in lines
-            List<string> lines = File.ReadAllLines("./Data/hurdat2-1851-2022-050423.txt").ToList();
+            string hurdat2Path = Path.Combine(Directory.GetCurrentDirectory(), "Data", "hurdat2-1851-2022-050423.txt");
+            List<string> lines = File.ReadAllLines(hurdat2Path).ToList();
 
             //Creates an instance of FloridaData
             FloridaData floridaData = new FloridaData();

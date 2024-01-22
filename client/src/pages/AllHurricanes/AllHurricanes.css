@@ -2,7 +2,6 @@
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 30px;
@@ -12,6 +11,7 @@
 
 @media only screen and (min-width: 1025px) {
     .AllHurricanes{
+        justify-content: center;
         flex-direction: row;
         flex-wrap: wrap;
     }
