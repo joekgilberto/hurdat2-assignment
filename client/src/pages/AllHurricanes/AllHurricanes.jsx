@@ -35,7 +35,7 @@ export default function AllHurricanes() {
   return (
     <div className="AllHurricanes">
       <div className='list-header'>
-        <h4>All Hurricanes that landed in Florida, 1900 onward</h4>
+        <h4>All {hurricanes.length} Hurricanes that landed in Florida, 1900 onward</h4>
         <button  onClick={(e) => download(e, 'florida-landfalls', hurricanes)}>Download</button>
       </div>
       <hr/>

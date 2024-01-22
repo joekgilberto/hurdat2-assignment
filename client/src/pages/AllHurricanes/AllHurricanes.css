@@ -48,7 +48,7 @@
 }
 
 .AllHurricanes .hurricane-list{
-    height: calc(95vh - 313px);
+    height: calc(95vh - 322px);
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -57,19 +57,19 @@
     overflow-y: scroll;
 }
 
-@media only screen and (min-width: 287px) {
+@media only screen and (min-width: 313px) {
     .AllHurricanes .hurricane-list{
         height: calc(95vh - 301px);
     }
 }
 
-@media only screen and (min-width: 492px) {
+@media only screen and (min-width: 518px) {
     .AllHurricanes .hurricane-list{
         height: calc(95vh - 280px);
     }
 }
 
-@media only screen and (min-width: 615px) {
+@media only screen and (min-width: 641px) {
     .AllHurricanes .list-header{
         flex-direction: row;
         justify-content: space-between;
@@ -85,7 +85,7 @@
     }
 }
 
-@media only screen and (min-width: 663px) {
+@media only screen and (min-width: 691px) {
     .AllHurricanes .list-header h4{
         font-size: 20px;
     }
@@ -95,9 +95,9 @@
     }
 }
 
-@media only screen and (min-width: 816px) {
+@media only screen and (min-width: 843px) {
     .AllHurricanes .list-header h4{
-        margin: 0 30px 0 0;
+        margin: 0 20px 0 0;
         font-size: 26px;
     }
 }
