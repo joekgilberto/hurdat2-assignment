@@ -99,4 +99,4 @@ Now, you can go to http://localhost:3000/ in your browser (Google Chrome is recc
 ## Current User Flow
 Firstly, visit [https://hurdat2-assignment.netlify.app/](https://hurdat2-assignment.netlify.app/)
 
-From the index page, the user view prelimary infromation on all hurricanes that have made landfall in Florida from 1900 onward.  The user can then click on one of the hurricanes to navigate to it's show page, and view further details including track entry information.
+From the index page, the user view prelimary infromation on all hurricanes that have made landfall in Florida from 1900 onward.  By clicking the "Download" button here, users can download a .txt file with a list of the hurricanes.  The user can then click on one of the hurricanes to navigate to it's show page, and view further details including track entry information.  By clicking the "Download" button here, users can download a .txt file of this hurricane and its track entries.
