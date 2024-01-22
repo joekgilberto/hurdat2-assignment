@@ -1,6 +1,6 @@
 import './AllHurricanes.css';
 
-//Imports useEffect from React, useDispatch and useSelector from Redux, and loadAllHurricanes, selectAllHurricanes, and isLoading from the allHurricanesSlice
+//Imports useEffect from React, useDispatch and useSelector from Redux, as well as loadAllHurricanes, selectAllHurricanes, and isLoading from the allHurricanesSlice, and downloadLandfalls as download from utilities
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadAllHurricanes, selectAllHurricanes, isLoading } from '../../slices/allHurricanesSlice';
@@ -32,23 +32,32 @@ export default function AllHurricanes() {
   }
 
   //Otherwise maps over the hurricanes state (if it has a length) and renders a Hurricane component for each hurricane
+  //In the case there are no hurricanes to iterate through, an error is shown
   return (
     <div className="AllHurricanes">
-      <div className='list-header'>
-        <h4>All {hurricanes.length} Hurricanes that landed in Florida, 1900 onward</h4>
-        <button  onClick={(e) => download(e, 'florida-landfalls', hurricanes)}>Download</button>
+      {hurricanes.length ?
+        <>
+          <div className='list-header'>
+            <h4>All {hurricanes.length} Hurricanes that landed in Florida, 1900 onward</h4>
+            <button onClick={(e) => download(e, 'florida-landfalls', hurricanes)}>Download</button>
+          </div>
+          <hr />
+          <div className='hurricane-list'>
+            {hurricanes.length ?
+              hurricanes.map((h, idx) => {
+                return (
+                  <Hurricane key={idx} hurricane={h} />
+                )
+              })
+              :
+              null}
       </div>
-      <hr/>
-      <div className='hurricane-list'>
-        {hurricanes.length ?
-          hurricanes.map((h, idx) => {
-            return (
-              <Hurricane key={idx} hurricane={h} />
-            )
-          })
-          :
-          null}
-      </div>
+        </>
+        :
+        <>
+        <h3 className='all-hurricanes-error'>No hurricanes found, check your backend connection.</h3>
+        <hr />
+        </>}
     </div>
   );
 }

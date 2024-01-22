@@ -1,6 +1,6 @@
 import './index.css';
 
-//Imports React from react, ReactDom from react-dom/client, BrowserRouter as Router from react-router-dom, Provider from Redux, and the configureStore
+//Imports React from react, ReactDom from react-dom/client, BrowserRouter as Router from react-router-dom, Provider from Redux, and the results of configureStore in the store.js file
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router } from "react-router-dom";

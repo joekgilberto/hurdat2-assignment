@@ -4,8 +4,8 @@ export function month(monthNumber){
     return months[monthNumber-1];
 }
 
-//Exports status function that returns a string that represents said status based on its corresponding key in an object of statuses
-export function status(status){
+//Exports status function that returns a string that represents a statusId based on its corresponding key in an object of statuses
+export function status(statusId){
     const statuses = {
         TD: 'tropical depression',
         TS: 'tropical storm',
@@ -19,24 +19,24 @@ export function status(status){
         'N/A': 'system'
     };
 
-    return statuses[status];
+    return statuses[statusId];
 }
 
 //Exports status function that takes a string parameter and returns said string with the first letter capitalized and the rest in lower case
-export function title(title)
+export function title(unformattedTitle)
 {
-    const firstLetter = title[0];
-    const rest = title.slice(1);
+    const firstLetter = unformattedTitle[0];
+    const rest = unformattedTitle.slice(1);
     const restLower = rest.toLowerCase();
 
     return `${firstLetter}${restLower}`;
 }
 
 //Exports named function that takes a name and, if is 'unnamed', returns a string that says 'Unnamed Hurricane', otherwise returning a string that says 'Hurricane {name}' (ex: 'Hurricane Katrina')
-export function named(name){
-    if (name.toLowerCase() === 'unnamed'){
-        return `${name} Hurricane`;
+export function named(baseName){
+    if (baseName.toLowerCase() === 'unnamed'){
+        return `${baseName} Hurricane`;
     } else {
-        return `Hurricane ${name}`;
+        return `Hurricane ${baseName}`;
     };
 }

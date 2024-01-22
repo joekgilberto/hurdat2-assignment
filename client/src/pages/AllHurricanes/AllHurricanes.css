@@ -57,6 +57,14 @@
     overflow-y: scroll;
 }
 
+.AllHurricanes .all-hurricanes-error{
+    margin: 0 0 20px 0;
+    color: #fff;
+    font-size: 30px;
+    font-weight: 400;
+    text-shadow: 0 3px 0 #00000040;
+}
+
 @media only screen and (min-width: 313px) {
     .AllHurricanes .hurricane-list{
         height: calc(95vh - 301px);

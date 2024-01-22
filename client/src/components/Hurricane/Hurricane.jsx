@@ -1,6 +1,6 @@
 import './Hurricane.css';
 
-//Imports the Link component to naviate the React app and custom utility functions from tools.js
+//Imports the Link component to navigate the React app and custom utility functions from tools.js
 import { Link } from 'react-router-dom';
 import * as tools from '../../utilities/tools';
 

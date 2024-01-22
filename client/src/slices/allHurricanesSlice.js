@@ -29,7 +29,7 @@ export const allHurricanesSlice = createSlice({
         state.isLoadingAllHurricanes = false;
         state.hurricanes = action.payload;
       })
-      .addCase(loadAllHurricanes.rejected, (state, action) => {
+      .addCase(loadAllHurricanes.rejected, (state) => {
         state.isLoadingAllHurricanes = false;
         state.hasAllHurricanesError = true;
         state.hurricanes = [];

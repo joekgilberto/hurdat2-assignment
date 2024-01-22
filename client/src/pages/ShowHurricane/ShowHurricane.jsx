@@ -51,6 +51,7 @@ export default function ShowHurricane() {
   }
 
   //Otherwise it displaces the hurricane name and year, maps over the hurricanes trackEntries returning TrackEntry components (with special argument being true if the index matches the .landfallsEntry), and adds a button to scroll down to the Florida Landfall entry
+  //In the case there is no hurricane to display, an error is shown
   return (
     hurricane.name ?
       <div className="ShowHurricane">
@@ -59,7 +60,7 @@ export default function ShowHurricane() {
           <p>{hurricane.year}</p>
         </div>
         <div className='track-header'>
-          <p className='track-count'>{hurricane.trackEntryCount} {hurricane.trackEntryCount===1?`Track Entry`:`Track Entries`}</p>
+          <p className='track-count'>{hurricane.trackEntryCount} {hurricane.trackEntryCount === 1 ? `Track Entry` : `Track Entries`}</p>
           <div className='track-buttons'>
             <button className='track-download' onClick={(e) => download(e, hurricane.atcfCode, hurricane)}>Download</button>
             <button className='track-scroll' onClick={scroll}>Scroll To Landfall</button>
@@ -75,6 +76,9 @@ export default function ShowHurricane() {
         </div>
       </div>
       :
-      <Loading />
+      <div className='show-hurricane-error'>
+        <h3>No hurricane found, check your backend connection.</h3>
+        <hr />
+      </div>
   );
 }

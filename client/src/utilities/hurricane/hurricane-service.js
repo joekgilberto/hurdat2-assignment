@@ -13,12 +13,16 @@ export async function getAllHurricanes() {
     }
 }
 
-//Exports getHurricane function with an id as a parameter that calls upon hurricaneApi.show() in a try/catch, with said id parameter passed as an argument, and, if the response has a length, returns the first index, otherwise returning an empty object 
+//Exports getHurricane function with an id as a parameter that calls upon hurricaneApi.show() in a try/catch, with said id parameter passed as an argument, and, if the response exits and has a length, returns the first index, otherwise returning an empty object 
 export async function getHurricane(id) {
     try {
         const response = await hurricaneApi.show(id);
-        if(response.length){
-            return response[0];
+        if(response){
+            if(response.length){
+                return response[0];
+            } else{
+                return {};
+            }
         } else {
             return {};
         }

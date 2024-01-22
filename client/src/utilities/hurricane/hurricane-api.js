@@ -1,4 +1,4 @@
-//Imports axios from axios and assigns BASE_URL to evvironmental variable REACT_APP_HURRICANE_URL
+//Imports axios from axios and assigns BASE_URL to evvironmental variable REACT_APP_HURRICANE_PROD_URL
 import axios from 'axios';
 const BASE_URL = process.env.REACT_APP_HURRICANE_PROD_URL;
 
