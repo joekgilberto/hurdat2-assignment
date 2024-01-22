@@ -34,9 +34,11 @@ export default function AllHurricanes() {
   //Otherwise maps over the hurricanes state (if it has a length) and renders a Hurricane component for each hurricane
   return (
     <div className="AllHurricanes">
-      <div className='all-download'>
+      <div className='list-header'>
+        <h4>All Hurricanes that landed in Florida, 1900 onward</h4>
         <button  onClick={(e) => download(e, 'florida-landfalls', hurricanes)}>Download</button>
       </div>
+      <hr/>
       <div className='hurricane-list'>
         {hurricanes.length ?
           hurricanes.map((h, idx) => {

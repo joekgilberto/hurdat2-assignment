@@ -9,7 +9,7 @@ export default function Header() {
     <header>
       <Link to="/">
         <h1>HURDAT2</h1>
-        <h2>Hurricanes that landed in Florida, 1900 onward</h2>
+        <h2>Parsed by Joe Gilberto</h2>
       </Link>
     </header>
   );
