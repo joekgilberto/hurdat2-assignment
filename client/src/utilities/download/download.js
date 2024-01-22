@@ -6,26 +6,22 @@ function toFile({ data, fileName }) {
     const blob = new Blob([data],{ type: 'text/plain' })
 
     //Create a anchor for the downloadLink
-    const donwloadLink = document.createElement('a');
+    const downloadLink = document.createElement('a');
 
     //Sets downloadLink's download attribute to the file name
-    donwloadLink.download = `${fileName}.txt`;
+    downloadLink.download = `${fileName}.txt`;
 
     //Sets downloadLink's href's attribute to a URL representing the Blob object
-    donwloadLink.href = window.URL.createObjectURL(blob)
+    downloadLink.href = URL.createObjectURL(blob);
 
-    //Creates a click MouseEvent
-    const click = new MouseEvent('click', {
-        view: window,
-        bubbles: true,
-        cancelable: true,
-    })
+    //Adds downloadLink to the dom
+    document.body.appendChild(downloadLink);
 
-    //Dispatches the click event when the functions called
-    donwloadLink.dispatchEvent(click)
+    //Calls click event
+    downloadLink.click();
 
     //Removes downloadLink
-    donwloadLink.remove()
+    document.body.removeChild(downloadLink);
 }
 
 //Creates and exports downloadLandfalls function that takes a fileName and a list of hurricanes as parameters
