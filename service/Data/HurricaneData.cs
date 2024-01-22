@@ -15,7 +15,7 @@ namespace service.Data
         public List<Landfall> Landfalls
         { get; set; }
 
-        //Creates a constructor (with no parameters) for HurricaneData
+        //Creates a constructor for HurricaneData
         public HurricaneData()
         {
             //Takes the lines of the hurdat2 .txt file and turns them into a list of strings stored in lines
@@ -60,6 +60,7 @@ namespace service.Data
                     hurricaneCache.addTrackEntries(new TrackEntry(lines[i]));
                 }
             }
+
             //Adds final hurricane in hurricaneCache to the hurricaneStore
             hurricaneStore.Add(hurricaneCache);
 

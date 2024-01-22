@@ -25,41 +25,33 @@ namespace service.Controllers
         [HttpGet("all")]
         public List<Hurricane> GetAll()
         {
-            //Creates a hurricanes variable that calls all Hurricanes stored in _context.Hurricanes (an instance of HurricaneData)
+            //Assigns a List of Hurricanes to the List of Hurricanes kept in the instance of HurricaneData
             List<Hurricane> hurricanes = _context.Hurricanes;
 
             //Returns said hurricanes variable
             return hurricanes;
         }
 
-        //Creates a GetByATCFCode controller that returns a specific hurricane called by an ATCF Code, accepting a string labeled ATCFCode
-        [HttpGet("{ATCFCode}")]
-        public List<Hurricane> GetByATCFCode(string ATCFCode)
-        {
-            //Returns a list of hurricanes where the hurricane's ATCF Code equeals the inputed string, which only includes one matching hurricane
-            List<Hurricane> hurricane = _context.Hurricanes.Where(h => h.ATCFCode == ATCFCode).ToList();
-
-            //Returns the found hurricane in list form (or an empty list if no hurricane is found)
-            return hurricane;
-        }
-
         //Creates a GetLandfalls controller that returns all landfalls
         [HttpGet("landfalls")]
         public List<Landfall> GetLandfalls()
         {
-            //Assigns a List of Landfalls to the List of Landfalls kepy in the instance of HurricaneData
+            //Assigns a List of Landfalls to the List of Landfalls kept in the instance of HurricaneData
             List<Landfall> landfalls = _context.Landfalls;
 
             //Returns the List of Landfalls
             return landfalls;
         }
 
-        //Creates a GetTest test controller that returns the string "test" to help developers ensure the application is running
-        [HttpGet("test")]
-        public string GetTest()
+        //Creates a GetByATCFCode controller that returns a specific hurricane called by an ATCF Code, accepting a string parameter, ATCFCode
+        [HttpGet("{ATCFCode}")]
+        public List<Hurricane> GetByATCFCode(string ATCFCode)
         {
-            //Returns a string, "test"
-            return "test";
+            //Returns a list of hurricanes where the hurricane's ATCF Code equeals the inputed string
+            List<Hurricane> hurricane = _context.Hurricanes.Where(h => h.ATCFCode == ATCFCode).ToList();
+
+            //Returns the found hurricane in list form (or an empty list if no hurricane is found)
+            return hurricane;
         }
     }
 }

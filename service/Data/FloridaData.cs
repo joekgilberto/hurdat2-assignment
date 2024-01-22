@@ -19,7 +19,7 @@ namespace service.Data
         //Creates a constructor for FloridaData
         public FloridaData()
 		{
-            //Parses Florida GEOJson to a string;
+            //Parses Florida GEOJson to a string
             string floridaPath = Path.Combine(Directory.GetCurrentDirectory(), "Data", "fl-state.json");
             string jsonString = File.ReadAllText(floridaPath);
 

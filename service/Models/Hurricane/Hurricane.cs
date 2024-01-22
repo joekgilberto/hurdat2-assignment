@@ -51,6 +51,9 @@ namespace service.Models
                 lines[i] = lines[i].Trim();
             }
 
+            //Assigns ATCFCode to lines[0]
+            ATCFCode = lines[0];
+
             //Assigns Basin to the first two characters of lines[0]
             Basin = lines[0].Substring(0, 2);
 
@@ -74,22 +77,6 @@ namespace service.Models
 
             //Assigns TrackEntries to an empty list of TrackEntry instances
             TrackEntries = new List<TrackEntry>();
-
-            //Builds the ATCFCode and assigns it to the string property of ATCFCode
-            //If ATCFNumber is less than 10, a 0 is added to the atcfCode string to align with the ATCF Code's format
-            string atcfCode;
-
-            if (ATCFNumber < 10)
-            {
-                atcfCode = $"{Basin}0{ATCFNumber}{Year}";
-            }
-            else
-            {
-                //Otherwise, neededZero is not added
-                atcfCode = $"{Basin}{ATCFNumber}{Year}";
-            }
-
-            ATCFCode = atcfCode;
         }
 
         //Creates a method to add TrackEntry instances to the TrackEntries property (a TrackEntry list)
@@ -98,13 +85,14 @@ namespace service.Models
             TrackEntries.Add(trackEntry);
         }
 
-        //Creates a method to return a boolean that represents whether this instance of a Hurricane made landfall in Florida
+        //Creates a method to return etheir an instance of Landfall or null based on if the instance of Hurricane made landfall in Florida as a hurricane status from 1900 onward
         public Landfall? createLandfall(FloridaData floridaData)
         {
 
             //Iterates through the TrackEntries property
             for(int i = 0; i < TrackEntries.Count; i++)
             {
+                //Caches the current TrackEntry to the TrackEntry variable entry
                 TrackEntry entry = TrackEntries[i];
 
                 //Assigns longitude and latitude doubles to the Longitude and Latitude properties of the selected TrackEntry
@@ -123,10 +111,10 @@ namespace service.Models
                     latitude = latitude * -1;
                 }
 
-                //Creates a new instance of the Point class with a new instance of the Coordinate class passed as an argument to its constructor, with the latitude and longitude doubles passed to the Coordinate constructor
+                //Creates a new instance of a Point a new instance a Coordinate passed as an argument to its constructor, with the latitude and longitude doubles passed to the Coordinate constructor
                 Point currentPoint = new Point(new Coordinate(latitude, longitude));
 
-                //Checks to ensure floridaData.Coordinates is not null, and if floridaData.Coordinates is null the method returns false
+                //Checks to ensure floridaData.Coordinates is not null, and if floridaData.Coordinates is null the method returns null
                 if (floridaData.Coordinates == null)
                 {
                     return null;
@@ -140,7 +128,7 @@ namespace service.Models
                         //Iterates over the first list of a coordGroup
                         for (int j = 0; j < coordGroup[0].Count; j++)
                         {
-                            //For each set of cooridnates in the coordGroup's second list, it passes the latitude and longitude (second and first index of the final list) to the constructor of a new Coordinate instance
+                            //For each set of cooridnates in the coordGroup's second list, it passes the latitude and longitude (second and first index of the final nested list respectively) to the constructor of a new Coordinate instance
                             //And assigns said the create coordinate to the current index of the coordList
                             Coordinate addedCoord = new Coordinate(coordGroup[0][j][1], coordGroup[0][j][0]);
                             coordList[j] = addedCoord;
@@ -149,7 +137,7 @@ namespace service.Models
                         //Creates a new Polygon with a new LinearRing passed as an argument to its constructor, with the coordList passed as the argument to the LinearRing constructor
                         Polygon section = new Polygon(new LinearRing(coordList));
 
-                        //The polygon, section, checks if the currentPoint is in said section and saves the boolean return value to passes
+                        //The polygon, section, checks if the currentPoint is in said polygon and saves the boolean return value to passes
                         bool passes = section.Contains(currentPoint);
 
                         //If passes is true, the current TrackEntry's method, IsHurricane, returns true, and the entry is from 1900 or later, the current index is saved to the LandfallEntry property and the method returns an instance of Landfall constructed with the ATCFCode and Name properties as well as the current entry
@@ -165,14 +153,14 @@ namespace service.Models
 
             }
 
-            //If true is not returned beforehand (because no coordinates in the TrackEntries property are found within the polyogns and/or because the entry that is found within the polygon is not a hurricane upon landing in Florida), the method defaults to returning false
+            //If true is not returned beforehand (because no coordinates in the TrackEntries property are found within the polyogns and/or because the entry that is found within the polygon is not a hurricane upon landing in Florida from 1900 onward), the method defaults to returning null
             return null;
         }
 
         //Overrides the existing ToString() method to return a string of the Hurricane's properties
         public override string ToString()
         {
-            return $"ATCFCode: {ATCFCode}; Basin: {Basin}; ATCFNumber: {ATCFNumber}; Year: {Year}; Name: {Name}; TrackEntryCount:{TrackEntryCount}; TrackEntries.Count: {TrackEntries.Count};";
+            return $"ATCFCode: {ATCFCode}; Basin: {Basin}; ATCFNumber: {ATCFNumber}; Year: {Year}; Name: {Name}; TrackEntryCount:{TrackEntryCount};";
         }
     }
 }
