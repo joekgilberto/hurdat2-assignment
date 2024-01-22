@@ -1,4 +1,4 @@
-# Blu-Rave
+# HURDAT2 Assignment
 A full-stack APS.NET/React web application that parses the [NHC](https://www.nhc.noaa.gov/data/)'s Best Track Data (HURDAT2) of [Atlantic hurricanes from 1851-2022](https://www.nhc.noaa.gov/data/hurdat/hurdat2-1851-2022-050423.txt) and returns a list of all huricanes that made landfall in Florida from 1900 onward.  Utilizes a React frontend with a Redux library making Axios API calls (deployed on Netlify), and a ASP.NET Core Web API backend deployed on Azure that parses the above .txt file and [Florida GeoJSON](https://raw.githubusercontent.com/danielcs88/fl_geo_json/master/fl-state.json).  Built by [Joe Gilberto](https://joekgilberto.com/).
 
 ## Deployment
