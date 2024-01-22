@@ -1,6 +1,6 @@
 //Imports axios from axios and assigns BASE_URL to evvironmental variable REACT_APP_HURRICANE_URL
 import axios from 'axios';
-const BASE_URL = process.env.REACT_APP_HURRICANE_PROD_URL;
+const BASE_URL = process.env.REACT_APP_HURRICANE_DEV_URL;
 
 //Exports async function index that returns data from response of BASE_URL/landfalls/, a list of all landfall hurricanes
 export async function index() {

@@ -43,6 +43,8 @@ export default function ShowHurricane() {
     })
   }
 
+  console.log(hurricane)
+
   //If loading is true, returns the Loading components
   if (loading) {
     return <Loading />
@@ -57,7 +59,7 @@ export default function ShowHurricane() {
           <p>{hurricane.year}</p>
         </div>
         <div className='track-header'>
-          <p className='track-title'>Track Entries</p>
+          <p className='track-count'>{hurricane.trackEntryCount} {hurricane.trackEntryCount===1?`Track Entry`:`Track Entries`}</p>
           <div className='track-buttons'>
             <button className='track-download' onClick={(e) => download(e, hurricane.atcfCode, hurricane)}>Download</button>
             <button className='track-scroll' onClick={scroll}>Scroll To Landfall</button>

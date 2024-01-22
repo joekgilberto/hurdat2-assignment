@@ -27,23 +27,26 @@
     background-color: #c9daf8ce;
     box-shadow: 0 4px 0 #00000040;
     border-radius: 15px 0 0 15px;
-    animation: back-and-forth 3s infinite;
+    animation: back-and-forth 2.5s infinite;
 }
 
 @keyframes back-and-forth {
     0% {
         border-radius: 15px 0 0 15px;
         transform: translateX(0px);
+        background-color: #c9daf8ce;
     }
 
     50% {
         border-radius: 0 15px 15px 0;
         transform: translateX(286px);
+        background-color: #8cafebce;
 
     }
 
     100% {
         border-radius: 15px 0 0 15px;
         transform: translateX(0px);
+        background-color: #c9daf8ce;
     }
 }

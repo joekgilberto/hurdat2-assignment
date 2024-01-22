@@ -9,7 +9,7 @@ footer{
     text-align: center;
 }
 
-footer a:hover{
+footer:hover a{
     text-decoration: underline;
 }
 
