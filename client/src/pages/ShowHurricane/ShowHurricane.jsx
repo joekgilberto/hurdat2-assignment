@@ -5,6 +5,7 @@ import { useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadCurrentHurricane, selectCurrentHurricane, isLoading } from '../../features/currentHurricaneSlice';
+import { downloadHurricane as download } from '../../utilities/download/download';
 import * as tools from '../../utilities/tools';
 
 import Loading from '../../components/Loading/Loading';
@@ -19,7 +20,7 @@ export default function ShowHurricane() {
   //Assigns useDispatch() function to dispatch
   const dispatch = useDispatch();
 
-    //Assigns hurricanes to selectCurrentHurricane state
+  //Assigns hurricanes to selectCurrentHurricane state
   const hurricane = useSelector(selectCurrentHurricane);
 
   //Assigns loading to isLoading boolean
@@ -57,7 +58,10 @@ export default function ShowHurricane() {
         </div>
         <div className='track-header'>
           <p className='track-title'>Track Entries</p>
-          <button onClick={scroll}>Scroll To Landfall</button>
+          <div className='track-buttons'>
+            <button className='track-download' onClick={(e) => download(e, hurricane.atcfCode, hurricane)}>Download</button>
+            <button className='track-scroll' onClick={scroll}>Scroll To Landfall</button>
+          </div>
         </div>
         <hr />
         <div className='track-entries' ref={trackRef}>

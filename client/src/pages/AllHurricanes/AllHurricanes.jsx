@@ -4,6 +4,7 @@ import './AllHurricanes.css';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadAllHurricanes, selectAllHurricanes, isLoading } from '../../features/allHurricanesSlice';
+import { downloadLandfalls as download } from '../../utilities/download/download';
 
 import Hurricane from '../../components/Hurricane/Hurricane';
 import Loading from '../../components/Loading/Loading';
@@ -33,14 +34,19 @@ export default function AllHurricanes() {
   //Otherwise maps over the hurricanes state (if it has a length) and renders a Hurricane component for each hurricane
   return (
     <div className="AllHurricanes">
-      {hurricanes.length ?
-        hurricanes.map((h, idx) => {
-          return (
+      <div className='all-download'>
+        <button  onClick={(e) => download(e, 'florida-landfalls', hurricanes)}>Download</button>
+      </div>
+      <div className='hurricane-list'>
+        {hurricanes.length ?
+          hurricanes.map((h, idx) => {
+            return (
               <Hurricane key={idx} hurricane={h} />
-          )
-        })
-        :
-        null}
+            )
+          })
+          :
+          null}
+      </div>
     </div>
   );
 }
