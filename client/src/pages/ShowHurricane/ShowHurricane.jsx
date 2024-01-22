@@ -4,7 +4,7 @@ import './ShowHurricane.css';
 import { useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadCurrentHurricane, selectCurrentHurricane, isLoading } from '../../features/currentHurricaneSlice';
+import { loadCurrentHurricane, selectCurrentHurricane, isLoading } from '../../slices/currentHurricaneSlice';
 import { downloadHurricane as download } from '../../utilities/download/download';
 import * as tools from '../../utilities/tools';
 

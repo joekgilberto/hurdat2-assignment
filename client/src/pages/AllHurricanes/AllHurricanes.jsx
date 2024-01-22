@@ -3,7 +3,7 @@ import './AllHurricanes.css';
 //Imports useEffect from React, useDispatch and useSelector from Redux, and loadAllHurricanes, selectAllHurricanes, and isLoading from the allHurricanesSlice
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadAllHurricanes, selectAllHurricanes, isLoading } from '../../features/allHurricanesSlice';
+import { loadAllHurricanes, selectAllHurricanes, isLoading } from '../../slices/allHurricanesSlice';
 import { downloadLandfalls as download } from '../../utilities/download/download';
 
 import Hurricane from '../../components/Hurricane/Hurricane';
