@@ -2,7 +2,7 @@
 A full-stack APS.NET/React web application that parses the [NHC](https://www.nhc.noaa.gov/data/)'s Best Track Data (HURDAT2) of [Atlantic hurricanes from 1851-2022](https://www.nhc.noaa.gov/data/hurdat/hurdat2-1851-2022-050423.txt) and returns a list of all huricanes that made landfall in Florida from 1900 onward.  Utilizes a React frontend with a Redux library making Axios API calls (deployed on Netlify), and a ASP.NET Core Web API backend deployed on Azure that parses the above .txt file and [Florida GeoJSON](https://raw.githubusercontent.com/danielcs88/fl_geo_json/master/fl-state.json).  Built by [Joe Gilberto](https://joekgilberto.com/).
 
 ## Deployment
-Find the app deployed on Netlify, here: [https://hurdat2-assignment.netlify.app/](https://hurdat2-assignment.netlify.app/)
+Currently not deployed.
 
 ## Screenshots
 
@@ -97,6 +97,6 @@ npm start
 Now, you can go to http://localhost:3000/ in your browser (Google Chrome is reccommended for best performance) and browse the application.
 
 ## Current User Flow
-Firstly, visit [https://hurdat2-assignment.netlify.app/](https://hurdat2-assignment.netlify.app/)
+Firstly, spin up the deployment per the above instructions.
 
 From the index page, the user view prelimary infromation on all hurricanes that have made landfall in Florida from 1900 onward.  By clicking the "Download" button here, users can download a .txt file with a list of the hurricanes.  The user can then click on one of the hurricanes to navigate to it's show page, and view further details including track entry information.  By clicking the "Download" button here, users can download a .txt file of this hurricane and its track entries.
